@@ -1,0 +1,2437 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Student Portal — Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --sidebar: #1b2a47;
+        --sidebar-hover: #243863;
+        --sidebar-text: #b7c1d9;
+        --accent-blue: #2e6be6;
+        --accent-green: #2fa84f;
+        --bg: #f2f3f7;
+        --paper: #ffffff;
+        --ink: #232837;
+        --muted: #8a90a2;
+        --border: #e7e9f0;
+        --danger: #d4453a;
+        --radius: 8px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        font-size: 14px;
+      }
+      .app {
+        display: grid;
+        grid-template-columns: 230px 1fr;
+        min-height: 100vh;
+        transition: grid-template-columns 0.2s ease;
+      }
+      .app.collapsed {
+        grid-template-columns: 72px 1fr;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        background: var(--sidebar);
+        color: var(--sidebar-text);
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        transition: width 0.2s ease;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 18px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .brand .logo {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #2e6be6, #2fa84f);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 700;
+        font-size: 13px;
+        flex: none;
+      }
+      .brand .txt {
+        line-height: 1.2;
+      }
+      .brand .txt .l1 {
+        font-weight: 700;
+        color: #fff;
+        font-size: 15px;
+      }
+      .brand .txt .l2 {
+        font-weight: 700;
+        color: #4cc97f;
+        font-size: 15px;
+        margin-top: -2px;
+      }
+
+      nav.nav-list {
+        padding: 10px 10px;
+        flex: 1;
+      }
+      .nav-item,
+      .nav-parent {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        color: var(--sidebar-text);
+        font-size: 13.5px;
+        font-weight: 500;
+        border: none;
+        background: none;
+        text-align: left;
+        width: 100%;
+      }
+      .nav-item .ic,
+      .nav-parent .ic {
+        width: 17px;
+        height: 17px;
+        flex: none;
+        opacity: 0.85;
+      }
+      .nav-item:hover,
+      .nav-parent:hover {
+        background: var(--sidebar-hover);
+        color: #fff;
+      }
+      .nav-item.active {
+        background: var(--accent-blue);
+        color: #fff;
+      }
+      .nav-parent {
+        justify-content: space-between;
+      }
+      .nav-parent .left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .nav-parent .chev {
+        transition: transform 0.15s ease;
+        font-size: 11px;
+      }
+      .nav-parent.open .chev {
+        transform: rotate(90deg);
+      }
+      .submenu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        padding-left: 14px;
+      }
+      .submenu.open {
+        max-height: 400px;
+      }
+      .submenu .nav-item {
+        font-size: 13px;
+        padding: 8px 12px 8px 30px;
+        color: #9aa5be;
+      }
+      .submenu .nav-item.active {
+        background: var(--accent-blue);
+        color: #fff;
+      }
+      .submenu .nav-item:hover {
+        color: #fff;
+      }
+
+      /* Collapsed (icon-only) sidebar */
+      .label {
+        white-space: nowrap;
+      }
+      .sidebar.collapsed .brand {
+        justify-content: center;
+        padding: 18px 10px;
+      }
+      .sidebar.collapsed .brand .txt {
+        display: none;
+      }
+      .sidebar.collapsed .nav-item,
+      .sidebar.collapsed .nav-parent {
+        justify-content: center;
+        padding: 10px;
+      }
+      .sidebar.collapsed .nav-parent .left {
+        gap: 0;
+      }
+      .sidebar.collapsed .label,
+      .sidebar.collapsed .chev {
+        display: none;
+      }
+      .sidebar.collapsed .submenu {
+        max-height: 0 !important;
+      }
+      .sidebar.collapsed .nav-item .ic,
+      .sidebar.collapsed .nav-parent .ic {
+        opacity: 1;
+      }
+
+      /* Main */
+      .main {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 28px;
+        background: var(--paper);
+        border-bottom: 1px solid var(--border);
+      }
+      .menu-btn {
+        background: none;
+        border: none;
+        font-size: 20px;
+        color: var(--accent-blue);
+        cursor: pointer;
+      }
+      .who {
+        text-align: right;
+        line-height: 1.3;
+      }
+      .who .nm {
+        font-weight: 700;
+        font-size: 13.5px;
+      }
+      .who .id {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .content {
+        padding: 24px 28px;
+        flex: 1;
+      }
+      .section {
+        display: none;
+      }
+      .section.active {
+        display: block;
+        animation: fade 0.2s ease;
+      }
+      @keyframes fade {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .page-head {
+        margin-bottom: 18px;
+      }
+      .page-head h2 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+      }
+      .page-head p {
+        margin: 2px 0 0;
+        color: var(--muted);
+        font-size: 12.5px;
+      }
+
+      /* Dashboard: profile banner */
+      .profile-banner {
+        background: linear-gradient(120deg, #e7f0ff, #f4f0ff);
+        border-radius: var(--radius);
+        padding: 22px 26px;
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        transition: box-shadow 0.18s ease;
+      }
+      .profile-banner:hover {
+        box-shadow: 0 8px 22px rgba(46, 107, 230, 0.12);
+      }
+      .profile-banner .avatar {
+        width: 76px;
+        height: 76px;
+        border-radius: 50%;
+        background: #c9d6ee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        font-weight: 700;
+        color: #3e5c94;
+        flex: none;
+        border: 3px solid #fff;
+      }
+      .profile-banner .info h3 {
+        margin: 0;
+        font-size: 19px;
+      }
+      .profile-banner .info .role {
+        color: var(--muted);
+        font-size: 13px;
+        margin-top: 2px;
+      }
+      .profile-banner .badge {
+        display: inline-block;
+        margin-top: 8px;
+        background: #dff6e4;
+        color: var(--accent-green);
+        font-size: 11.5px;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 20px;
+      }
+      .profile-meta {
+        display: flex;
+        gap: 40px;
+        margin-left: auto;
+        flex-wrap: wrap;
+      }
+      .profile-meta .col {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 12.5px;
+        color: var(--ink);
+      }
+      .profile-meta .col span {
+        color: var(--muted);
+        margin-right: 4px;
+      }
+
+      /* Icon grid rows */
+      .panel-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+      .panel {
+        background: var(--paper);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px 18px;
+        transition:
+          box-shadow 0.18s ease,
+          transform 0.18s ease,
+          border-color 0.18s ease;
+      }
+      .panel:hover {
+        box-shadow: 0 6px 18px rgba(27, 42, 71, 0.08);
+        transform: translateY(-2px);
+        border-color: #d3d8e4;
+      }
+      .panel h4 {
+        margin: 0 0 14px;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .tile-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .tile {
+        flex: 1;
+        min-width: 90px;
+        border-radius: 8px;
+        padding: 16px 10px;
+        color: #fff;
+        text-align: center;
+        font-size: 12.5px;
+        font-weight: 600;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease,
+          filter 0.18s ease;
+      }
+      .tile:hover {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+        filter: brightness(1.08);
+      }
+      .tile .ic {
+        font-size: 20px;
+      }
+
+      .card {
+        background: var(--paper);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        margin-bottom: 18px;
+        overflow: hidden;
+        transition:
+          box-shadow 0.18s ease,
+          border-color 0.18s ease;
+      }
+      .card:hover {
+        box-shadow: 0 8px 20px rgba(27, 42, 71, 0.08);
+        border-color: #d3d8e4;
+      }
+      .card-head {
+        padding: 14px 20px;
+        border-bottom: 1px solid var(--border);
+      }
+      .card-head h3 {
+        margin: 0;
+        font-size: 14.5px;
+        font-weight: 700;
+      }
+      .card-body {
+        padding: 20px;
+      }
+      .empty-note {
+        color: var(--muted);
+        font-size: 13px;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      /* chart */
+      .chart-wrap {
+        padding: 10px 10px 0;
+      }
+      .chart-legend {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 14px;
+      }
+      .chart-legend .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 2px;
+        background: var(--accent-green);
+      }
+      .bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 60px;
+        height: 220px;
+        border-left: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 0 30px;
+        position: relative;
+      }
+      .bar-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        flex: none;
+        width: 60px;
+      }
+      .bar-col .bar {
+        width: 34px;
+        border-radius: 4px 4px 0 0;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        padding-top: 4px;
+      }
+      .bar-col .lbl {
+        font-size: 11.5px;
+        color: var(--muted);
+      }
+      .y-axis {
+        position: absolute;
+        left: -28px;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        font-size: 10.5px;
+        color: var(--muted);
+      }
+
+      /* Academic result */
+      .two-col {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 18px;
+        align-items: start;
+      }
+      .filter-row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 18px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .filter-row select {
+        padding: 9px 14px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-size: 13px;
+        min-width: 220px;
+        background: var(--paper);
+        color: var(--ink);
+      }
+      .btn {
+        padding: 9px 18px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+        background: var(--accent-blue);
+        color: #fff;
+      }
+      .btn:hover {
+        background: #2258c4;
+      }
+      .student-info {
+        padding: 18px 20px 4px;
+      }
+      .student-info .nm {
+        color: var(--accent-blue);
+        font-weight: 700;
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
+      .student-info .row {
+        display: flex;
+        gap: 8px;
+        font-size: 13px;
+        color: var(--ink);
+        margin-bottom: 6px;
+      }
+      .student-info .row .ic {
+        color: var(--muted);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      thead th {
+        text-align: left;
+        padding: 10px 20px;
+        background: #fafafc;
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 11.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        border-bottom: 1px solid var(--border);
+        border-top: 1px solid var(--border);
+      }
+      tbody td {
+        padding: 11px 20px;
+        border-bottom: 1px solid var(--border);
+      }
+      tbody tr:nth-child(even) {
+        background: #fbfbfd;
+      }
+      tfoot td {
+        padding: 12px 20px;
+        font-weight: 700;
+        border-top: 2px solid var(--border);
+      }
+      .note-line {
+        font-size: 12px;
+        color: var(--danger);
+        padding: 14px 20px;
+      }
+      .note-line a {
+        color: var(--accent-blue);
+      }
+
+      /* Payment ledger summary cards */
+      .summary-row {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 16px;
+        margin-bottom: 22px;
+      }
+      .summary-card {
+        background: linear-gradient(135deg, #3a3f9e, #2e3480);
+        border-radius: var(--radius);
+        color: #fff;
+        text-align: center;
+        padding: 18px 12px;
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease;
+        cursor: default;
+      }
+      .summary-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(46, 52, 128, 0.35);
+      }
+      .summary-card .s-label {
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 14px;
+      }
+      .summary-card .s-value {
+        font-size: 19px;
+        font-weight: 700;
+      }
+
+      /* waiver empty state */
+      .waiver-empty {
+        text-align: center;
+        padding: 40px 20px;
+      }
+      .waiver-empty .w-title {
+        color: var(--danger);
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+      .waiver-empty .w-sub {
+        color: var(--muted);
+        font-size: 12.5px;
+      }
+
+      @media (max-width: 1100px) {
+        .summary-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* Career development cards */
+      .link-section {
+        margin-bottom: 32px;
+      }
+      .link-section h3.grp-title {
+        font-size: 15px;
+        font-weight: 700;
+        margin: 0 0 14px;
+      }
+      .link-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      .link-card {
+        background: var(--paper);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 26px 16px;
+        text-align: center;
+        cursor: pointer;
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease,
+          border-color 0.18s ease;
+      }
+      .link-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 22px rgba(27, 42, 71, 0.1);
+        border-color: #c9d2e8;
+      }
+      .link-card:hover .badge-ic {
+        transform: scale(1.08);
+      }
+      .badge-ic {
+        transition: transform 0.18s ease;
+      }
+      .link-card .badge-ic {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        margin: 0 auto 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        color: #fff;
+        font-weight: 700;
+      }
+      .link-card .lt {
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+      .link-card .ls {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      @media (max-width: 900px) {
+        .link-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* Notice board */
+      .dept-tabs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+      .dept-tab {
+        background: var(--paper);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 9px 16px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition:
+          background 0.15s ease,
+          border-color 0.15s ease,
+          transform 0.15s ease;
+      }
+      .dept-tab:hover {
+        border-color: var(--sidebar);
+        transform: translateY(-1px);
+      }
+      .dept-tab.active:hover {
+        transform: none;
+      }
+      .dept-tab .cnt {
+        background: #eef0f5;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 700;
+        border-radius: 10px;
+        padding: 1px 7px;
+      }
+      .dept-tab.active {
+        background: var(--sidebar);
+        color: #fff;
+        border-color: var(--sidebar);
+      }
+      .dept-tab.active .cnt {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+      }
+
+      .notice-item {
+        display: flex;
+        gap: 18px;
+        background: var(--paper);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px 20px;
+        margin-bottom: 12px;
+        align-items: center;
+        cursor: pointer;
+        transition:
+          box-shadow 0.18s ease,
+          border-color 0.18s ease,
+          transform 0.18s ease;
+      }
+      .notice-item:hover {
+        box-shadow: 0 8px 18px rgba(27, 42, 71, 0.08);
+        border-color: #d3d8e4;
+        transform: translateX(3px);
+      }
+      .notice-date {
+        background: var(--sidebar);
+        color: #fff;
+        border-radius: 8px;
+        width: 64px;
+        height: 56px;
+        flex: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        line-height: 1.15;
+      }
+      .notice-date .dd {
+        font-size: 19px;
+      }
+      .notice-date .mm {
+        font-size: 10.5px;
+        font-weight: 600;
+      }
+      .notice-body .nt {
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 6px;
+      }
+      .notice-meta {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .notice-meta span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .pagination-row {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 14px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+      }
+      .pagination-row .total {
+        font-size: 12.5px;
+        color: var(--muted);
+        margin-right: auto;
+      }
+      .page-btn {
+        border: 1px solid var(--border);
+        background: var(--paper);
+        border-radius: 6px;
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+        cursor: pointer;
+        color: var(--ink);
+        transition:
+          background 0.15s ease,
+          border-color 0.15s ease,
+          color 0.15s ease;
+      }
+      .page-btn:hover {
+        background: #eef2fb;
+        border-color: var(--accent-blue);
+        color: var(--accent-blue);
+      }
+      .page-btn.active {
+        background: var(--accent-blue);
+        color: #fff;
+        border-color: var(--accent-blue);
+      }
+      .page-btn.active:hover {
+        background: #2258c4;
+      }
+
+      /* Facilities grid */
+      .facility-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      .facility-card {
+        background: var(--paper);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 26px 14px;
+        text-align: center;
+        cursor: pointer;
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease,
+          border-color 0.18s ease;
+      }
+      .facility-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 22px rgba(27, 42, 71, 0.1);
+        border-color: #c9d2e8;
+      }
+      .facility-card:hover .f-ic {
+        transform: scale(1.15);
+      }
+      .facility-card .f-ic {
+        font-size: 28px;
+        margin-bottom: 12px;
+        transition: transform 0.18s ease;
+      }
+      .facility-card .ft {
+        font-weight: 700;
+        font-size: 13.5px;
+        margin-bottom: 3px;
+      }
+      .facility-card .fs {
+        font-size: 11.5px;
+        color: var(--muted);
+      }
+      @media (max-width: 1000px) {
+        .facility-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* Academic calendar */
+      .cal-header {
+        background: var(--navy, #1b2a47);
+        border-radius: var(--radius);
+        padding: 22px 26px 30px;
+        margin-bottom: 0;
+      }
+      .cal-header h2 {
+        color: #fff;
+        font-size: 19px;
+        margin: 0 0 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .cal-select {
+        max-width: 420px;
+        background: #fff;
+        border-radius: 6px;
+        position: relative;
+      }
+      .cal-select select {
+        width: 100%;
+        padding: 11px 14px;
+        border: none;
+        border-radius: 6px;
+        font-size: 13.5px;
+        color: var(--ink);
+        background: transparent;
+        appearance: none;
+        cursor: pointer;
+      }
+      .cal-select::after {
+        content: '▾';
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--muted);
+        pointer-events: none;
+      }
+      .cal-table-wrap {
+        background: var(--paper);
+        border: 1px solid var(--border);
+        border-top: none;
+        border-radius: 0 0 var(--radius) var(--radius);
+        overflow: hidden;
+        margin-top: -6px;
+      }
+      .cal-table-wrap table {
+        font-size: 13px;
+      }
+      .cal-table-wrap thead th {
+        background: #f3f5fa;
+      }
+      .cal-table-wrap tbody td:first-child {
+        font-weight: 600;
+      }
+      .cal-note {
+        font-size: 12px;
+        color: var(--muted);
+        padding: 14px 20px;
+        font-style: italic;
+      }
+      .cal-empty {
+        padding: 14px;
+        color: var(--muted);
+        font-size: 13px;
+        background: #fff;
+        border-radius: 0 0 6px 6px;
+      }
+
+      @media (max-width: 900px) {
+        .app {
+          grid-template-columns: 1fr;
+        }
+        .sidebar {
+          position: fixed;
+          z-index: 30;
+          width: 230px;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          transform: translateX(-100%);
+          transition: transform 0.2s ease;
+        }
+        .sidebar.open {
+          transform: translateX(0);
+        }
+        .panel-row {
+          grid-template-columns: 1fr;
+        }
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+        .profile-meta {
+          margin-left: 0;
+          gap: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand">
+          <div class="logo">DP</div>
+          <div class="txt">
+            <div class="l1">Daffodil</div>
+            <div class="l2">Portal</div>
+          </div>
+        </div>
+
+        <nav class="nav-list" id="navList">
+          <button
+            class="nav-item active"
+            data-target="dashboard"
+            title="Dashboard"
+          >
+            <span class="ic">▦</span><span class="label">Dashboard</span>
+          </button>
+
+          <button
+            class="nav-parent"
+            data-sub="academic"
+            title="Academic Management"
+          >
+            <span class="left"
+              ><span class="ic">🎓</span
+              ><span class="label">Academic Management</span></span
+            >
+            <span class="chev">›</span>
+          </button>
+          <div class="submenu" id="sub-academic">
+            <button
+              class="nav-item"
+              data-target="acalendar"
+              data-label="Academic Calendar"
+            >
+              <span class="label">Academic Calendar</span>
+            </button>
+            <button
+              class="nav-item"
+              data-target="courses"
+              data-label="Course Registration"
+            >
+              <span class="label">Course Registration</span>
+            </button>
+            <button
+              class="nav-item"
+              data-target="placeholder"
+              data-label="Registration/Exam Clearance"
+            >
+              <span class="label">Registration/Exam Clearance</span>
+            </button>
+            <button
+              class="nav-item"
+              data-target="placeholder"
+              data-label="Routine"
+            >
+              <span class="label">Routine</span>
+            </button>
+            <button
+              class="nav-item"
+              data-target="placeholder"
+              data-label="Teaching Evaluation"
+            >
+              <span class="label">Teaching Evaluation</span>
+            </button>
+            <button
+              class="nav-item"
+              data-target="placeholder"
+              data-label="Live Results"
+            >
+              <span class="label">Live Results</span>
+            </button>
+            <button
+              class="nav-item"
+              data-target="result"
+              data-label="Academic Results"
+            >
+              <span class="label">Academic Results</span>
+            </button>
+            <button
+              class="nav-item"
+              data-target="placeholder"
+              data-label="Certificates & Transcripts"
+            >
+              <span class="label">Certificates &amp; Transcripts</span>
+            </button>
+            <button
+              class="nav-item"
+              data-target="placeholder"
+              data-label="Convocation Application"
+            >
+              <span class="label">Convocation Application</span>
+            </button>
+          </div>
+
+          <button
+            class="nav-parent"
+            data-sub="finance"
+            title="Financial Service"
+          >
+            <span class="left"
+              ><span class="ic">🧾</span
+              ><span class="label">Financial Service</span></span
+            >
+            <span class="chev">›</span>
+          </button>
+          <div class="submenu" id="sub-finance">
+            <button
+              class="nav-item"
+              data-target="finance"
+              data-label="Payment Ledger"
+            >
+              <span class="label">Payment Ledger</span>
+            </button>
+            <button
+              class="nav-item"
+              data-target="waiver"
+              data-label="Scholarship & Waiver"
+            >
+              <span class="label">Scholarship &amp; Waiver</span>
+            </button>
+            <button
+              class="nav-item"
+              data-target="placeholder"
+              data-label="Financial Aid Circular"
+            >
+              <span class="label">Financial Aid Circular</span>
+            </button>
+            <button
+              class="nav-item"
+              data-target="placeholder"
+              data-label="Financial Aid Application"
+            >
+              <span class="label">Financial Aid Application</span>
+            </button>
+          </div>
+
+          <button
+            class="nav-item"
+            data-target="career"
+            data-label="Career Development"
+            title="Career Development"
+          >
+            <span class="ic">💼</span
+            ><span class="label">Career Development</span>
+          </button>
+
+          <button
+            class="nav-parent"
+            data-sub="services"
+            title="Student Services"
+          >
+            <span class="left"
+              ><span class="ic">🧑</span
+              ><span class="label">Student Services</span></span
+            >
+            <span class="chev">›</span>
+          </button>
+          <div class="submenu" id="sub-services">
+            <button
+              class="nav-item"
+              data-target="placeholder"
+              data-label="Transport Card"
+            >
+              <span class="label">Transport Card</span>
+            </button>
+            <button
+              class="nav-item"
+              data-target="placeholder"
+              data-label="Hall Management"
+            >
+              <span class="label">Hall Management</span>
+            </button>
+          </div>
+
+          <button
+            class="nav-item"
+            data-target="notice"
+            data-label="Notice Board"
+            title="Notice Board"
+          >
+            <span class="ic">📋</span><span class="label">Notice Board</span>
+          </button>
+          <button
+            class="nav-item"
+            data-target="facilities"
+            data-label="Facilities"
+            title="Facilities"
+          >
+            <span class="ic">#</span><span class="label">Facilities</span>
+          </button>
+          <button
+            class="nav-item"
+            data-target="placeholder"
+            data-label="Logout"
+            title="Logout"
+          >
+            <span class="ic">⎋</span><span class="label">Logout</span>
+          </button>
+        </nav>
+      </aside>
+
+      <div class="main">
+        <div class="topbar">
+          <button class="menu-btn" id="menuBtn">☰</button>
+          <div class="who">
+            <div class="nm">Pronoy Dass</div>
+            <div class="id">261-35-331</div>
+          </div>
+        </div>
+
+        <div class="content">
+          <!-- DASHBOARD -->
+          <section class="section active" id="dashboard">
+            <div class="page-head">
+              <h2>Dashboard</h2>
+              <p>Student Portal</p>
+            </div>
+
+            <div class="profile-banner">
+              <div class="avatar">PD</div>
+              <div class="info">
+                <h3>Pronoy Dass</h3>
+                <div class="role">B.Sc. in Software Engineering</div>
+                <div class="badge">✓ Active</div>
+              </div>
+              <div class="profile-meta">
+                <div class="col">
+                  <div><span>ID:</span>02426105341331</div>
+                  <div><span>Reg:</span>261-35-331</div>
+                  <div><span>Batch:</span>48</div>
+                </div>
+                <div class="col">
+                  <div><span>Email:</span>261-35-331@diu.edu.bd</div>
+                  <div><span>Phone:</span>01873828082</div>
+                  <div><span>Campus:</span>DSC</div>
+                </div>
+                <div class="col">
+                  <div><span>DOB:</span>Apr 7, 2004</div>
+                  <div><span>Gender:</span>Male</div>
+                  <div><span>Blood:</span>AB+</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-row">
+              <div class="panel">
+                <h4>Learning Resource</h4>
+                <div class="tile-row">
+                  <div class="tile" style="background: #3e3576">
+                    <span class="ic">📚</span>Library
+                  </div>
+                  <div class="tile" style="background: #1f8a5c">
+                    <span class="ic">🖥️</span>BLC
+                  </div>
+                  <div class="tile" style="background: #17a6c7">
+                    <span class="ic">🎓</span>Go Edu
+                  </div>
+                </div>
+              </div>
+              <div class="panel">
+                <h4>Student Service</h4>
+                <div class="tile-row">
+                  <div class="tile" style="background: #7a3fa0">
+                    <span class="ic">🚌</span>Transport Card
+                  </div>
+                  <div class="tile" style="background: #d0453f">
+                    <span class="ic">🏢</span>Hall Management
+                  </div>
+                  <div class="tile" style="background: #e0a72a">
+                    <span class="ic">💻</span>Laptop Scheme
+                  </div>
+                </div>
+              </div>
+              <div class="panel">
+                <h4>Academic</h4>
+                <div class="tile-row">
+                  <div class="tile" style="background: #232837">
+                    <span class="ic">📈</span>Live Result
+                  </div>
+                  <div class="tile" style="background: #5b4fc7">
+                    <span class="ic">🗓️</span>Routine
+                  </div>
+                  <div class="tile" style="background: #1fa87e">
+                    <span class="ic">🎓</span>Certificate
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head"><h3>🗓️ Today's Routine — Friday</h3></div>
+              <div class="empty-note">No routine available for today.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-head"><h3>Semester Wise Result</h3></div>
+              <div class="card-body">
+                <div class="chart-wrap">
+                  <div class="chart-legend">
+                    <span class="dot"></span> Semester-wise CGPA Performance
+                  </div>
+                  <div class="bars">
+                    <div class="y-axis">
+                      <span>0</span><span>1.0</span><span>2.0</span
+                      ><span>3.0</span><span>4.0</span>
+                    </div>
+                    <div class="bar-col">
+                      <div
+                        class="bar"
+                        style="height: 154px; background: #4cc97f"
+                      >
+                        3.52
+                      </div>
+                      <div class="lbl">Spring 2026</div>
+                    </div>
+                    <div class="bar-col">
+                      <div
+                        class="bar"
+                        style="height: 126px; background: #c77fd1"
+                      >
+                        2.85
+                      </div>
+                      <div class="lbl">Summer 2026</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ACADEMIC RESULT -->
+          <section class="section" id="result">
+            <div class="page-head">
+              <h2>Academic Result</h2>
+            </div>
+
+            <div class="filter-row">
+              <span style="font-size: 12.5px; color: var(--muted)"
+                >Select Semester</span
+              >
+              <select id="semSelect">
+                <option>Summer 2026, 262</option>
+                <option>Spring 2026, 261</option>
+              </select>
+              <button class="btn" onclick="renderResult()">Search</button>
+            </div>
+
+            <div class="two-col">
+              <div class="card">
+                <div class="card-head"><h3>👤 Student Information</h3></div>
+                <div class="student-info">
+                  <div class="nm" id="resName">Pronoy Dass</div>
+                  <div class="row">
+                    <span class="ic">🎓</span> B.Sc. in Software Engineering
+                  </div>
+                  <div class="row"><span class="ic">👥</span> Batch: 48</div>
+                  <div class="row">
+                    <span class="ic">🪪</span> Student ID: 02426105341331
+                  </div>
+                  <div class="row">
+                    <span class="ic">💳</span> Reg ID: 261-35-331
+                  </div>
+                  <div class="row">
+                    <span class="ic">ℹ️</span> SGPA of
+                    <span id="resSemLabel">Summer 2026, 262</span>:
+                    <b id="resSgpa">2.85</b>
+                  </div>
+                </div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>SL</th>
+                      <th>Course Code</th>
+                      <th>Course Title</th>
+                      <th>Credit</th>
+                      <th>Grade</th>
+                      <th>Grade Point</th>
+                    </tr>
+                  </thead>
+                  <tbody id="resultBody">
+                    <!-- filled by JS -->
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="3">Total Credit</td>
+                      <td id="totCredit">13.00</td>
+                      <td></td>
+                      <td>SGPA <span id="totSgpa">2.85</span></td>
+                    </tr>
+                  </tfoot>
+                </table>
+                <div class="note-line">
+                  N.B.: If you see Teaching Evaluation Pending in any course,
+                  please complete <a href="#">Teaching Evaluation</a>.
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><h3>UGC Uniform Grading System</h3></div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Marks (%)</th>
+                      <th>Grade</th>
+                      <th>Grade Point</th>
+                      <th>Remarks</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>80–100</td>
+                      <td>A+</td>
+                      <td>4.00</td>
+                      <td>Outstanding</td>
+                    </tr>
+                    <tr>
+                      <td>75–79</td>
+                      <td>A</td>
+                      <td>3.75</td>
+                      <td>Excellent</td>
+                    </tr>
+                    <tr>
+                      <td>70–74</td>
+                      <td>A-</td>
+                      <td>3.50</td>
+                      <td>Very Good</td>
+                    </tr>
+                    <tr>
+                      <td>65–69</td>
+                      <td>B+</td>
+                      <td>3.25</td>
+                      <td>Good</td>
+                    </tr>
+                    <tr>
+                      <td>60–64</td>
+                      <td>B</td>
+                      <td>3.00</td>
+                      <td>Satisfactory</td>
+                    </tr>
+                    <tr>
+                      <td>55–59</td>
+                      <td>B-</td>
+                      <td>2.75</td>
+                      <td>Above Average</td>
+                    </tr>
+                    <tr>
+                      <td>50–54</td>
+                      <td>C+</td>
+                      <td>2.50</td>
+                      <td>Average</td>
+                    </tr>
+                    <tr>
+                      <td>45–49</td>
+                      <td>C</td>
+                      <td>2.25</td>
+                      <td>Below Average</td>
+                    </tr>
+                    <tr>
+                      <td>40–44</td>
+                      <td>D</td>
+                      <td>2.00</td>
+                      <td>Pass</td>
+                    </tr>
+                    <tr>
+                      <td>00–39</td>
+                      <td>F</td>
+                      <td>0.00</td>
+                      <td>Fail</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- PAYMENT LEDGER -->
+          <section class="section" id="finance">
+            <div class="summary-row">
+              <div class="summary-card">
+                <div class="s-label">Registration Fee</div>
+                <div class="s-value">36,550.00</div>
+              </div>
+              <div class="summary-card">
+                <div class="s-label">Total Payable</div>
+                <div class="s-value">183,900.00</div>
+              </div>
+              <div class="summary-card">
+                <div class="s-label">Total Paid</div>
+                <div class="s-value">220,500.00</div>
+              </div>
+              <div class="summary-card">
+                <div class="s-label">Total Due</div>
+                <div class="s-value">-36,600.00</div>
+              </div>
+              <div class="summary-card">
+                <div class="s-label">Total Other</div>
+                <div class="s-value">1,000.00</div>
+              </div>
+            </div>
+
+            <div class="page-head"><h2>Payment Ledger</h2></div>
+
+            <div class="filter-row">
+              <span style="font-size: 12.5px; color: var(--muted)"
+                >Select Semester</span
+              >
+              <select id="ledgerSemSelect" onchange="renderLedger()">
+                <option>Summer 2026, 262</option>
+                <option>Spring 2026, 261</option>
+              </select>
+              <button class="btn" onclick="renderLedger()">Search</button>
+            </div>
+
+            <div class="card">
+              <table>
+                <thead>
+                  <tr>
+                    <th>SL</th>
+                    <th>Transaction Date</th>
+                    <th>Collected By</th>
+                    <th>Head Description</th>
+                    <th>Receivable</th>
+                    <th>Paid</th>
+                    <th>Other</th>
+                  </tr>
+                </thead>
+                <tbody id="ledgerBody"></tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="4">Total</td>
+                    <td id="ledgerTotReceivable"></td>
+                    <td id="ledgerTotPaid"></td>
+                    <td id="ledgerTotOther">0.00</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </section>
+
+          <!-- SCHOLARSHIP & WAIVER -->
+          <section class="section" id="waiver">
+            <div class="card">
+              <div class="card-head"><h3>🎓 Semester Waiver</h3></div>
+              <div class="waiver-empty">
+                <div class="w-title">⚠ No Semester Waiver</div>
+                <div class="w-sub">You have no Semester Waiver</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-head"><h3>🎓 Fixed Waiver</h3></div>
+              <div class="waiver-empty">
+                <div class="w-title">⚠ No Fixed Waiver Found</div>
+                <div class="w-sub">You have no fixed waiver</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- CAREER DEVELOPMENT -->
+          <section class="section" id="career">
+            <div class="link-section">
+              <h3 class="grp-title">Career Services</h3>
+              <div class="link-grid">
+                <div class="link-card">
+                  <div class="badge-ic" style="background: #3e5c94">IN</div>
+                  <div class="lt">Internship</div>
+                  <div class="ls">Find internship opportunities.</div>
+                </div>
+                <div class="link-card">
+                  <div class="badge-ic" style="background: #2e6be6">CDC</div>
+                  <div class="lt">CDC</div>
+                  <div class="ls">Career Development Center.</div>
+                </div>
+                <div class="link-card">
+                  <div class="badge-ic" style="background: #d9455f">JU</div>
+                  <div class="lt">Job Utsob</div>
+                  <div class="ls">
+                    Explore job fairs &amp; recruitment events.
+                  </div>
+                </div>
+                <div class="link-card">
+                  <div class="badge-ic" style="background: #f2994a">SJ</div>
+                  <div class="lt">Skill Jobs</div>
+                  <div class="ls">Search jobs based on your skills.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="link-section">
+              <h3 class="grp-title">Learning Resources</h3>
+              <div class="link-grid">
+                <div class="link-card">
+                  <div class="badge-ic" style="background: #1f8a5c">LB</div>
+                  <div class="lt">Library</div>
+                  <div class="ls">Access the digital library catalog.</div>
+                </div>
+                <div class="link-card">
+                  <div class="badge-ic" style="background: #17a6c7">BLC</div>
+                  <div class="lt">BLC</div>
+                  <div class="ls">Bright Language Center.</div>
+                </div>
+                <div class="link-card">
+                  <div class="badge-ic" style="background: #e0a72a">GE</div>
+                  <div class="lt">Go Edu</div>
+                  <div class="ls">
+                    Study abroad &amp; higher education services.
+                  </div>
+                </div>
+                <div class="link-card">
+                  <div class="badge-ic" style="background: #7a3fa0">IOU</div>
+                  <div class="lt">IOU</div>
+                  <div class="ls">
+                    International Opportunities &amp; collaborations.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- NOTICE BOARD -->
+          <section class="section" id="notice">
+            <div class="dept-tabs" id="deptTabs">
+              <div class="dept-tab active" data-dept="all">All Departments</div>
+              <div class="dept-tab" data-dept="FSIT">
+                FSIT <span class="cnt">6</span>
+              </div>
+              <div class="dept-tab" data-dept="FBE">
+                FBE <span class="cnt">8</span>
+              </div>
+              <div class="dept-tab" data-dept="FHSS">
+                FHSS <span class="cnt">9</span>
+              </div>
+              <div class="dept-tab" data-dept="ENGINEERING">
+                ENGINEERING <span class="cnt">9</span>
+              </div>
+              <div class="dept-tab" data-dept="FHLS">
+                FHLS <span class="cnt">6</span>
+              </div>
+              <div class="dept-tab" data-dept="FGS">
+                FGS <span class="cnt">1</span>
+              </div>
+              <div class="dept-tab" data-dept="FAS">
+                FAS <span class="cnt">2</span>
+              </div>
+              <div class="dept-tab" data-dept="INSTITUTIONAL">
+                INSTITUTIONAL-PROGRAMS <span class="cnt">3</span>
+              </div>
+              <div class="dept-tab" data-dept="OFFICE">
+                OFFICE <span class="cnt">9</span>
+              </div>
+            </div>
+
+            <div id="noticeList"></div>
+
+            <div class="pagination-row">
+              <div class="total">Total Notices: 3433</div>
+              <button class="page-btn">‹</button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <span style="color: var(--muted)">…</span>
+              <button class="page-btn">344</button>
+              <button class="page-btn">›</button>
+            </div>
+          </section>
+
+          <!-- FACILITIES -->
+          <section class="section" id="facilities">
+            <div class="page-head">
+              <h2>Student Benefits &amp; Services</h2>
+            </div>
+            <div class="facility-grid">
+              <div class="facility-card">
+                <div class="f-ic">🏷️</div>
+                <div class="ft">Discount Partners</div>
+                <div class="fs">Exclusive student discounts</div>
+              </div>
+              <div class="facility-card">
+                <div class="f-ic">🔴</div>
+                <div class="ft">Google Workspace</div>
+                <div class="fs">Email, Drive, Docs &amp; Meet</div>
+              </div>
+              <div class="facility-card">
+                <div class="f-ic">🟦</div>
+                <div class="ft">Microsoft 365</div>
+                <div class="fs">Office Apps &amp; OneDrive</div>
+              </div>
+              <div class="facility-card">
+                <div class="f-ic">⬛</div>
+                <div class="ft">GitHub Student Pack</div>
+                <div class="fs">Developer tools &amp; offers</div>
+              </div>
+
+              <div class="facility-card">
+                <div class="f-ic">🟧</div>
+                <div class="ft">JetBrains License</div>
+                <div class="fs">Professional IDEs</div>
+              </div>
+              <div class="facility-card">
+                <div class="f-ic">☁️</div>
+                <div class="ft">Azure for Students</div>
+                <div class="fs">Free cloud credits</div>
+              </div>
+              <div class="facility-card">
+                <div class="f-ic">📮</div>
+                <div class="ft">Postman</div>
+                <div class="fs">API Development</div>
+              </div>
+              <div class="facility-card">
+                <div class="f-ic">🍃</div>
+                <div class="ft">MongoDB Atlas</div>
+                <div class="fs">Cloud Database</div>
+              </div>
+
+              <div class="facility-card">
+                <div class="f-ic">🎨</div>
+                <div class="ft">Figma Education</div>
+                <div class="fs">UI/UX Design</div>
+              </div>
+              <div class="facility-card">
+                <div class="f-ic">🖌️</div>
+                <div class="ft">Canva Education</div>
+                <div class="fs">Graphic Design</div>
+              </div>
+              <div class="facility-card">
+                <div class="f-ic">📐</div>
+                <div class="ft">Autodesk</div>
+                <div class="fs">Engineering &amp; CAD</div>
+              </div>
+              <div class="facility-card">
+                <div class="f-ic">📊</div>
+                <div class="ft">Tableau</div>
+                <div class="fs">Data Visualization</div>
+              </div>
+
+              <div class="facility-card">
+                <div class="f-ic">🖥️</div>
+                <div class="ft">Miro</div>
+                <div class="fs">Collaborative Whiteboard</div>
+              </div>
+              <div class="facility-card">
+                <div class="f-ic">✅</div>
+                <div class="ft">Asana</div>
+                <div class="fs">Project Management</div>
+              </div>
+              <div class="facility-card">
+                <div class="f-ic">🟢</div>
+                <div class="ft">ClickUp</div>
+                <div class="fs">Task Management</div>
+              </div>
+              <div class="facility-card">
+                <div class="f-ic">📓</div>
+                <div class="ft">Notion Plus</div>
+                <div class="fs">Notes &amp; Workspace</div>
+              </div>
+
+              <div class="facility-card">
+                <div class="f-ic">🤖</div>
+                <div class="ft">Perplexity AI</div>
+                <div class="fs">AI Search Assistant</div>
+              </div>
+              <div class="facility-card">
+                <div class="f-ic">📦</div>
+                <div class="ft">Amazon Prime Student</div>
+                <div class="fs">Student Membership</div>
+              </div>
+              <div class="facility-card">
+                <div class="f-ic">🎵</div>
+                <div class="ft">Apple Music</div>
+                <div class="fs">Student Plan</div>
+              </div>
+              <div class="facility-card">
+                <div class="f-ic">🎧</div>
+                <div class="ft">Spotify Student</div>
+                <div class="fs">Premium Discount</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ACADEMIC CALENDAR -->
+          <section class="section" id="acalendar">
+            <div class="cal-header">
+              <h2>📅 Academic Calendar</h2>
+              <div class="cal-select">
+                <select id="calSelect" onchange="renderCalendar()">
+                  <option value="">Select Academic Calendar</option>
+                  <option value="2025">Academic Calendar - 2025</option>
+                </select>
+              </div>
+            </div>
+            <div id="calBody"></div>
+          </section>
+
+          <!-- COURSE REGISTRATION -->
+          <section class="section" id="courses">
+            <div class="page-head"><h2>Registered Course</h2></div>
+
+            <div class="filter-row">
+              <span style="font-size: 12.5px; color: var(--muted)"
+                >Search Semester</span
+              >
+              <select id="courseSemSelect" onchange="renderCourses()">
+                <!-- To add a new semester option, add one <option> line here
+                 AND add a matching entry in courseData in the script below. -->
+                <option>Fall 2026, 263</option>
+                <option>Summer 2026, 262</option>
+                <option>Spring 2026, 261</option>
+              </select>
+              <button class="btn" onclick="renderCourses()">Search</button>
+            </div>
+
+            <div class="card">
+              <table>
+                <thead>
+                  <tr>
+                    <th>SL</th>
+                    <th>Course Code</th>
+                    <th>Course Title</th>
+                    <th>Credit</th>
+                    <th>Type</th>
+                    <th>Section</th>
+                    <th>Teacher</th>
+                  </tr>
+                </thead>
+                <tbody id="courseBody"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- PLACEHOLDER for other menu items -->
+          <section class="section" id="placeholder">
+            <div class="page-head"><h2 id="placeholderTitle">Section</h2></div>
+            <div class="card">
+              <div class="empty-note">
+                This section is a frontend placeholder — connect it to real data
+                or build it out further when you're ready.
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const navButtons = document.querySelectorAll('.nav-item')
+      const sections = document.querySelectorAll('.section')
+      const sidebar = document.getElementById('sidebar')
+      const menuBtn = document.getElementById('menuBtn')
+      const placeholderTitle = document.getElementById('placeholderTitle')
+
+      // expandable submenus
+      document.querySelectorAll('.nav-parent').forEach((p) => {
+        p.addEventListener('click', () => {
+          // if sidebar is collapsed, expand it first so the submenu is visible
+          if (sidebar.classList.contains('collapsed')) {
+            sidebar.classList.remove('collapsed')
+            document.querySelector('.app').classList.remove('collapsed')
+          }
+          const sub = document.getElementById('sub-' + p.dataset.sub)
+          const isOpen = sub.classList.contains('open')
+          document
+            .querySelectorAll('.submenu')
+            .forEach((s) => s.classList.remove('open'))
+          document
+            .querySelectorAll('.nav-parent')
+            .forEach((x) => x.classList.remove('open'))
+          if (!isOpen) {
+            sub.classList.add('open')
+            p.classList.add('open')
+          }
+        })
+      })
+
+      navButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const target = btn.dataset.target
+          navButtons.forEach((b) => b.classList.remove('active'))
+          btn.classList.add('active')
+
+          sections.forEach((s) => s.classList.remove('active'))
+          document.getElementById(target).classList.add('active')
+
+          if (target === 'placeholder') {
+            placeholderTitle.textContent = btn.dataset.label || 'Section'
+          }
+          sidebar.classList.remove('open')
+        })
+      })
+
+      menuBtn.addEventListener('click', () => {
+        if (window.matchMedia('(max-width: 900px)').matches) {
+          sidebar.classList.toggle('open')
+        } else {
+          document.querySelector('.app').classList.toggle('collapsed')
+          sidebar.classList.toggle('collapsed')
+          // closing any open submenu when collapsing, so it doesn't render broken
+          document
+            .querySelectorAll('.submenu')
+            .forEach((s) => s.classList.remove('open'))
+          document
+            .querySelectorAll('.nav-parent')
+            .forEach((p) => p.classList.remove('open'))
+        }
+      })
+
+      // Demo result data per semester
+      const resultData = {
+        'Summer 2026, 262': {
+          sgpa: '2.85',
+          credit: '13.00',
+          rows: [
+            [1, 'MAT101', 'Mathematics I', '3.00', 'D', '2.00'],
+            [2, 'SE121', 'Structured Programming', '3.00', 'B-', '2.75'],
+            [3, 'SE122', 'Structured Programming Lab', '1.00', 'A+', '4.00'],
+            [4, 'PHY101', 'Physics I', '3.00', 'B-', '2.75'],
+            [
+              5,
+              'SE212',
+              'Software Requirement Specifications & Analysis',
+              '3.00',
+              'A-',
+              '3.50',
+            ],
+          ],
+        },
+        'Spring 2026, 261': {
+          sgpa: '3.52',
+          credit: '12.00',
+          rows: [
+            [1, 'CSE311', 'Database Systems', '3.00', 'A', '3.75'],
+            [2, 'CSE312', 'Database Systems Lab', '1.00', 'A+', '4.00'],
+            [3, 'CSE315', 'Operating Systems', '3.00', 'B+', '3.25'],
+            [4, 'ENG102', 'English II', '2.00', 'A-', '3.50'],
+            [5, 'SE201', 'Object Oriented Programming', '3.00', 'A', '3.75'],
+          ],
+        },
+      }
+
+      function renderResult() {
+        const sem = document.getElementById('semSelect').value
+        const data = resultData[sem]
+        document.getElementById('resSemLabel').textContent = sem
+        document.getElementById('resSgpa').textContent = data.sgpa
+        document.getElementById('totSgpa').textContent = data.sgpa
+        document.getElementById('totCredit').textContent = data.credit
+        const body = document.getElementById('resultBody')
+        body.innerHTML = data.rows
+          .map(
+            (r) =>
+              `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td></tr>`,
+          )
+          .join('')
+      }
+      renderResult()
+
+      // Demo payment ledger data per semester
+      const ledgerData = {
+        'Summer 2026, 262': [
+          [
+            1,
+            'May 9, 2026',
+            'ASHULIA',
+            'Tuition Fee',
+            '0.00',
+            '36,550.00',
+            '0.00',
+          ],
+          [
+            2,
+            'Jul 15, 2026',
+            '',
+            'Campus Development Fee',
+            '4,500.00',
+            '0.00',
+            '0.00',
+          ],
+          [
+            3,
+            'Jul 15, 2026',
+            '',
+            'Extra Curriculam Fee',
+            '1,500.00',
+            '0.00',
+            '0.00',
+          ],
+          [4, 'Jul 15, 2026', '', 'Lab Fee', '3,000.00', '0.00', '0.00'],
+          [5, 'Jul 15, 2026', '', 'Library Fee', '750.00', '0.00', '0.00'],
+          [6, 'Jul 15, 2026', '', 'Semester Fee', '6,000.00', '0.00', '0.00'],
+          [7, 'Jul 15, 2026', '', 'Tuition Fee', '61,200.00', '0.00', '0.00'],
+          [
+            8,
+            'Aug 8, 2026',
+            'ASHULIA.',
+            'Campus Development Fee',
+            '0.00',
+            '4,500.00',
+            '0.00',
+          ],
+          [
+            9,
+            'Aug 8, 2026',
+            'ASHULIA.',
+            'Extra Curriculam Fee',
+            '0.00',
+            '1,500.00',
+            '0.00',
+          ],
+          [
+            10,
+            'Aug 8, 2026',
+            'ASHULIA.',
+            'Lab Fee',
+            '0.00',
+            '3,000.00',
+            '0.00',
+          ],
+          [
+            11,
+            'Aug 8, 2026',
+            'ASHULIA.',
+            'Library Fee',
+            '0.00',
+            '750.00',
+            '0.00',
+          ],
+          [
+            12,
+            'Aug 8, 2026',
+            'ASHULIA.',
+            'Semester Fee',
+            '0.00',
+            '6,000.00',
+            '0.00',
+          ],
+          [
+            13,
+            'Aug 8, 2026',
+            'ASHULIA.',
+            'Tuition Fee',
+            '0.00',
+            '24,750.00',
+            '0.00',
+          ],
+        ],
+        'Spring 2026, 261': [
+          [
+            1,
+            'Jan 12, 2026',
+            'ASHULIA',
+            'Tuition Fee',
+            '0.00',
+            '42,000.00',
+            '0.00',
+          ],
+          [2, 'Feb 2, 2026', 'ASHULIA', 'Lab Fee', '0.00', '3,500.00', '0.00'],
+          [
+            3,
+            'Feb 2, 2026',
+            'ASHULIA',
+            'Library Fee',
+            '0.00',
+            '750.00',
+            '0.00',
+          ],
+        ],
+      }
+
+      function renderLedger() {
+        const sem = document.getElementById('ledgerSemSelect').value
+        const rows = ledgerData[sem] || []
+        const body = document.getElementById('ledgerBody')
+        body.innerHTML = rows
+          .map(
+            (r) =>
+              `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td></tr>`,
+          )
+          .join('')
+
+        const sum = (idx) =>
+          rows
+            .reduce((a, r) => a + parseFloat(r[idx].replace(/,/g, '')), 0)
+            .toLocaleString('en-US', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })
+        document.getElementById('ledgerTotReceivable').textContent = sum(4)
+        document.getElementById('ledgerTotPaid').textContent = sum(5)
+      }
+      renderLedger()
+
+      // Notice board demo data
+      const notices = [
+        {
+          dd: '10',
+          mm: 'Sep, 26',
+          title: 'Updated Course Offer MCT – Fall-2026',
+          dept: 'ENGINEERING',
+          deptName: 'Multimedia & Creative Technology',
+          cat: 'Academic',
+          time: '10 Sep, 2026, 06:35 PM',
+          views: 19,
+        },
+        {
+          dd: '10',
+          mm: 'Sep, 26',
+          title: 'Updated Class Routine MCT – Fall-2026',
+          dept: 'ENGINEERING',
+          deptName: 'Multimedia & Creative Technology',
+          cat: 'Class Schedule',
+          time: '10 Sep, 2026, 06:35 PM',
+          views: 13,
+        },
+        {
+          dd: '10',
+          mm: 'Sep, 26',
+          title:
+            'Class Schedule of the department of Real Estate of Fall 2026 Semester',
+          dept: 'FBE',
+          deptName: 'Real Estate',
+          cat: 'Class Schedule',
+          time: '10 Sep, 2026, 03:44 PM',
+          views: 13,
+        },
+        {
+          dd: '10',
+          mm: 'Sep, 26',
+          title: 'Batch Wise Class Routine of Fall 2026 V1.1',
+          dept: 'ENGINEERING',
+          deptName: 'Civil Engineering',
+          cat: 'Academic',
+          time: '10 Sep, 2026, 03:38 PM',
+          views: 355,
+        },
+        {
+          dd: '10',
+          mm: 'Sep, 26',
+          title: '[MSc in Cyber Security] Class Routine for Fall 2026',
+          dept: 'FSIT',
+          deptName: 'Software Engineering',
+          cat: 'Class Schedule',
+          time: '10 Sep, 2026, 12:54 PM',
+          views: 26,
+        },
+        {
+          dd: '09',
+          mm: 'Sep, 26',
+          title: 'Class Routine for 10 September, 2026',
+          dept: 'FAS',
+          deptName: 'Agricultural Science',
+          cat: 'Class Schedule',
+          time: '09 Sep, 2026, 04:11 PM',
+          views: 119,
+        },
+        {
+          dd: '09',
+          mm: 'Sep, 26',
+          title: 'AGS Class Routine for Fall-2026 (V-1)',
+          dept: 'FAS',
+          deptName: 'Agricultural Science',
+          cat: 'Class Schedule',
+          time: '09 Sep, 2026, 04:06 PM',
+          views: 46,
+        },
+        {
+          dd: '09',
+          mm: 'Sep, 26',
+          title: 'Final Improvement Notice, Summer 2026',
+          dept: 'FSIT',
+          deptName: 'Software Engineering',
+          cat: 'Examination',
+          time: '09 Sep, 2026, 01:29 PM',
+          views: 104,
+        },
+        {
+          dd: '09',
+          mm: 'Sep, 26',
+          title: 'Improvement Examination – Summer 2026',
+          dept: 'FHSS',
+          deptName: 'Tourism & Hospitality Management',
+          cat: 'Examination',
+          time: '09 Sep, 2026, 10:03 AM',
+          views: 92,
+        },
+        {
+          dd: '08',
+          mm: 'Sep, 26',
+          title: 'CSE Class Routine Version 1.1 – Fall 2026',
+          dept: 'FSIT',
+          deptName: 'Computer Science and Engineering',
+          cat: 'Class Schedule',
+          time: '08 Sep, 2026, 06:04 PM',
+          views: 451,
+        },
+      ]
+
+      function renderNotices(filter) {
+        const list = document.getElementById('noticeList')
+        const filtered =
+          filter === 'all' ? notices : notices.filter((n) => n.dept === filter)
+        list.innerHTML =
+          filtered
+            .map(
+              (n) => `
+      <div class="notice-item">
+        <div class="notice-date"><span class="dd">${n.dd}</span><span class="mm">${n.mm}</span></div>
+        <div class="notice-body">
+          <div class="nt">${n.title}</div>
+          <div class="notice-meta">
+            <span>🏛 ${n.deptName}</span>
+            <span>📄 ${n.cat}</span>
+            <span>📅 ${n.time}</span>
+            <span>👁 ${n.views}</span>
+          </div>
+        </div>
+      </div>
+    `,
+            )
+            .join('') ||
+          '<div class="empty-note">No notices found for this department.</div>'
+      }
+
+      document.querySelectorAll('.dept-tab').forEach((tab) => {
+        tab.addEventListener('click', () => {
+          document
+            .querySelectorAll('.dept-tab')
+            .forEach((t) => t.classList.remove('active'))
+          tab.classList.add('active')
+          renderNotices(tab.dataset.dept)
+        })
+      })
+
+      renderNotices('all')
+
+      // Academic calendar data
+      const calendarData = {
+        2025: {
+          cols: [
+            'Event Details',
+            'Spring - 2025',
+            'Summer - 2025',
+            'Fall - 2025',
+          ],
+          rows: [
+            [
+              'Advising & Registration',
+              '9 January - 16 January 2025',
+              '03 May - 12 May 2025',
+              '07 September - 16 September 2025',
+            ],
+            [
+              'Orientation Program (Newly Admitted Students)',
+              '11 January 2025',
+              '06 May 2025',
+              '13 September 2025',
+            ],
+            [
+              'Classes Start',
+              '12 January 2025',
+              '07 May 2025',
+              '14 September 2025',
+            ],
+            [
+              'First Class Test',
+              '01 February - 06 February 2025',
+              '01 June - 04 June 2025',
+              '04 October - 07 October 2025',
+            ],
+            ['Eid-Ul-Adha Vacation*', '--', '05 June - 10 June, 2025', '--'],
+            [
+              'Second Class Test',
+              '16 February - 20 February 2025',
+              '21 June - 26 June 2025',
+              '15 October - 21 October 2025',
+            ],
+            [
+              'Industry-Related Activities',
+              '08 February - 23 February 2025',
+              '14 June - 26 June 2025',
+              '20 October - 28 October 2025',
+            ],
+            [
+              'Mid-Examination Week',
+              '01 March - 07 March 2025',
+              '28 June - 04 July 2025',
+              '29 October - 04 November 2025',
+            ],
+            [
+              'Industry-Related Activities',
+              '20 March - 10 April 2025',
+              '22 July - 31 July 2025',
+              '08 November - 16 November 2025',
+            ],
+            ['Eid-Ul-Fitr Vacation*', '29 March - 02 April 2025', '--', '--'],
+            [
+              'Third Class Test',
+              '05 April - 10 April 2025',
+              '02 August - 07 August 2025',
+              '01 December - 07 December 2025',
+            ],
+            [
+              'Final Examination',
+              '19 April - 24 April 2025',
+              '24 August - 31 August 2025',
+              '17 December - 24 December 2025',
+            ],
+            [
+              'Last Date of Grade Submission',
+              '27 April 2025',
+              '03 September 2025',
+              '28 December 2025',
+            ],
+            [
+              'Publication of Semester Results',
+              '28 April 2025',
+              '04 September 2025',
+              '29 December 2025',
+            ],
+            [
+              'Semester Break',
+              '28 April - 30 April 2025',
+              '04 September - 06 September, 2025',
+              '29 December – 31 December, 2025',
+            ],
+            [
+              'Advising & Registration of Next Semester',
+              '03 May - 12 May 2025',
+              '07 September - 16 September 2025',
+              '01 January - 10 January 2026',
+            ],
+            [
+              'Classes Start of Next Semester',
+              '07 May 2025',
+              '14 September 2025',
+              '07 January 2026',
+            ],
+          ],
+        },
+      }
+
+      function renderCalendar() {
+        const val = document.getElementById('calSelect').value
+        const body = document.getElementById('calBody')
+        if (!val) {
+          body.innerHTML = '<div class="cal-empty">No items found</div>'
+          return
+        }
+        const data = calendarData[val]
+        body.innerHTML = `
+      <div class="cal-table-wrap">
+        <table>
+          <thead><tr>${data.cols.map((c) => `<th>${c}</th>`).join('')}</tr></thead>
+          <tbody>
+            ${data.rows.map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join('')}</tr>`).join('')}
+          </tbody>
+        </table>
+        <div class="cal-note">*Dependent on moon sighting. Note: The schedule may be subject to change based on demand or situational factors.</div>
+      </div>
+    `
+      }
+      renderCalendar()
+
+      // ============================================================
+      // REGISTERED COURSE DATA
+      // ------------------------------------------------------------
+      // To add a new semester's courses:
+      //   1. Add a matching <option>Semester Name, Code</option> line
+      //      inside <select id="courseSemSelect"> above.
+      //   2. Add a new key here with the EXACT same text as the option,
+      //      and list its course rows in the same order as the table
+      //      columns: [SL, Course Code, Course Title, Credit, Type, Section, Teacher]
+      // ============================================================
+      const courseData = {
+        'Fall 2026, 263': [
+          [
+            1,
+            'SE213',
+            'Digital Electronics & Logic Design',
+            '3',
+            'REGULAR',
+            '47_F',
+            'Masrufa Tasnim',
+          ],
+          [2, 'SE123', 'Discrete Mathematics', '3', 'REGULAR', '47_F', ''],
+          [3, 'MAT102', 'Mathematics II', '3', 'REGULAR', '47_F', ''],
+          [4, 'SE131', 'Data Structure', '3', 'REGULAR', '47_F', ''],
+          [5, 'SE132', 'Data Structure Lab', '1', 'REGULAR', '47_F2', ''],
+        ],
+        'Summer 2026, 262': [
+          [1, 'MAT101', 'Mathematics I', '3', 'REGULAR', '48_F', ''],
+          [2, 'SE121', 'Structured Programming', '3', 'REGULAR', '48_F', ''],
+          [
+            3,
+            'SE122',
+            'Structured Programming Lab',
+            '1',
+            'REGULAR',
+            '48_F2',
+            '',
+          ],
+          [4, 'PHY101', 'Physics I', '3', 'REGULAR', '48_F', ''],
+          [
+            5,
+            'SE212',
+            'Software Requirement Specifications & Analysis',
+            '3',
+            'REGULAR',
+            '48_F',
+            '',
+          ],
+        ],
+        'Spring 2026, 261': [
+          [1, 'CSE311', 'Database Systems', '3', 'REGULAR', '48_F', ''],
+          [2, 'CSE312', 'Database Systems Lab', '1', 'REGULAR', '48_F2', ''],
+          [3, 'CSE315', 'Operating Systems', '3', 'REGULAR', '48_F', ''],
+        ],
+      }
+
+      function renderCourses() {
+        const sem = document.getElementById('courseSemSelect').value
+        const rows = courseData[sem] || []
+        const body = document.getElementById('courseBody')
+        body.innerHTML = rows.length
+          ? rows
+              .map(
+                (r) =>
+                  `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td></tr>`,
+              )
+              .join('')
+          : '<tr><td colspan="7" style="text-align:center; color:var(--muted);">No courses found for this semester.</td></tr>'
+      }
+      renderCourses()
+    </script>
+  </body>
+</html>
