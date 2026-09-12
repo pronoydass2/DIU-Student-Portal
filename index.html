@@ -969,6 +969,389 @@
         border-radius: 0 0 6px 6px;
       }
 
+      /* status icons / badges used in clearance, teaching evaluation, live results */
+      .stat-ic {
+        font-weight: 700;
+        font-size: 15px;
+      }
+      .stat-ic.yes {
+        color: var(--accent-green);
+      }
+      .stat-ic.no {
+        color: var(--danger);
+      }
+      .badge-submitted {
+        display: inline-block;
+        background: var(--accent-green);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 4px;
+      }
+      .view-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--accent-green);
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 6px 14px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.15s ease;
+      }
+      .view-btn:hover {
+        background: #238a41;
+      }
+
+      .page-head-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+      .apply-btn {
+        background: var(--accent-blue);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 9px 20px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.15s ease;
+      }
+      .apply-btn:hover {
+        background: #2258c4;
+      }
+      .not-eligible {
+        text-align: center;
+        padding: 70px 20px;
+        font-size: 19px;
+        font-weight: 700;
+        color: var(--ink);
+      }
+
+      /* toast notification */
+      .toast {
+        position: fixed;
+        top: 16px;
+        right: 20px;
+        z-index: 50;
+        background: #f2994a;
+        color: #fff;
+        font-size: 12.5px;
+        font-weight: 700;
+        padding: 10px 18px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+        animation: fade 0.25s ease;
+      }
+
+      /* generic empty state with icon */
+      .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+      }
+      .empty-state .ic {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #e4e1d8;
+        color: #8a90a2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 12px;
+        font-size: 16px;
+      }
+      .empty-state .msg {
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 13.5px;
+      }
+
+      /* ============ LANDING PAGE ============ */
+      #landingPage {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .landing-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 40px;
+        border-bottom: 1px solid var(--border);
+        background: #fff;
+      }
+      .landing-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .landing-brand .logo {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #2e6be6, #2fa84f);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .landing-brand .txt {
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 1.2;
+      }
+      .landing-brand .txt span {
+        display: block;
+        color: var(--accent-green);
+      }
+      .landing-nav {
+        display: flex;
+        gap: 28px;
+      }
+      .landing-nav a {
+        color: var(--ink);
+        text-decoration: none;
+        font-size: 13.5px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .landing-nav a:hover {
+        color: var(--accent-blue);
+      }
+      .landing-main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+      }
+      .landing-logo-big {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 26px;
+      }
+      .landing-logo-big .logo {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #2e6be6, #2fa84f);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 700;
+        font-size: 20px;
+      }
+      .landing-logo-big .txt {
+        font-size: 26px;
+        font-weight: 700;
+        line-height: 1.15;
+        font-family: 'Inter', sans-serif;
+      }
+      .landing-logo-big .txt span {
+        display: block;
+        color: var(--accent-green);
+      }
+      .landing-card {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 36px 46px;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      }
+      .landing-card h2 {
+        font-size: 19px;
+        font-weight: 600;
+        margin: 0 0 20px;
+        color: var(--ink);
+      }
+      .landing-card .login-btn {
+        background: #332c6e;
+        color: #fff;
+        border: none;
+        border-radius: 24px;
+        padding: 12px 44px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.15s ease;
+      }
+      .landing-card .login-btn:hover {
+        background: #251f57;
+      }
+      .landing-footer {
+        background: #332c6e;
+        color: #d6d3ee;
+        text-align: center;
+        padding: 14px;
+        font-size: 12.5px;
+      }
+      .landing-footer b {
+        color: #fff;
+      }
+
+      /* ============ LOGIN PAGE ============ */
+      #loginPage {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            circle at 20% 80%,
+            rgba(46, 107, 230, 0.06) 0,
+            transparent 45%
+          ),
+          radial-gradient(
+            circle at 80% 90%,
+            rgba(46, 107, 230, 0.06) 0,
+            transparent 45%
+          ),
+          #f3f4f7;
+      }
+      .login-network {
+        position: absolute;
+        bottom: -10%;
+        left: 0;
+        right: 0;
+        height: 60%;
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      .login-logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 28px;
+        z-index: 1;
+      }
+      .login-logo .logo {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #2e6be6, #2fa84f);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 700;
+        font-size: 18px;
+      }
+      .login-logo .txt {
+        font-size: 23px;
+        font-weight: 700;
+        line-height: 1.15;
+      }
+      .login-logo .txt span {
+        display: block;
+        color: var(--accent-green);
+      }
+      .login-card {
+        background: #fff;
+        width: 440px;
+        max-width: 90vw;
+        border-radius: 6px;
+        border-top: 4px solid var(--accent-blue);
+        box-shadow: 0 10px 30px rgba(20, 30, 60, 0.1);
+        padding: 34px 40px 30px;
+        z-index: 1;
+      }
+      .login-card h2 {
+        text-align: center;
+        font-weight: 500;
+        font-size: 20px;
+        color: #444;
+        margin: 0 0 26px;
+      }
+      .login-field {
+        margin-bottom: 18px;
+      }
+      .login-field label {
+        display: block;
+        font-size: 12.5px;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+      .login-field input {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        font-size: 14px;
+        font-family: 'Inter', sans-serif;
+        color: var(--ink);
+      }
+      .login-field input:focus {
+        outline: none;
+        border-color: var(--accent-blue);
+        box-shadow: 0 0 0 3px rgba(46, 107, 230, 0.12);
+      }
+      .login-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        font-size: 12.5px;
+      }
+      .login-row label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--ink);
+        cursor: pointer;
+      }
+      .login-row a {
+        color: var(--accent-blue);
+        text-decoration: none;
+      }
+      .login-row a:hover {
+        text-decoration: underline;
+      }
+      .login-submit {
+        width: 100%;
+        padding: 12px;
+        background: var(--accent-blue);
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 14.5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.15s ease;
+      }
+      .login-submit:hover {
+        background: #2258c4;
+      }
+      .login-error {
+        background: #fdedec;
+        color: var(--danger);
+        font-size: 12.5px;
+        font-weight: 600;
+        padding: 8px 12px;
+        border-radius: 5px;
+        margin-bottom: 16px;
+        display: none;
+      }
+
       @media (max-width: 900px) {
         .app {
           grid-template-columns: 1fr;
@@ -1000,376 +1383,919 @@
     </style>
   </head>
   <body>
-    <div class="app">
-      <aside class="sidebar" id="sidebar">
-        <div class="brand">
+    <!-- ============ LANDING PAGE ============ -->
+    <div id="landingPage">
+      <div class="landing-topbar">
+        <div class="landing-brand">
           <div class="logo">DP</div>
-          <div class="txt">
-            <div class="l1">Daffodil</div>
-            <div class="l2">Portal</div>
-          </div>
+          <div class="txt">Daffodil<span>University</span></div>
         </div>
-
-        <nav class="nav-list" id="navList">
-          <button
-            class="nav-item active"
-            data-target="dashboard"
-            title="Dashboard"
-          >
-            <span class="ic">▦</span><span class="label">Dashboard</span>
-          </button>
-
-          <button
-            class="nav-parent"
-            data-sub="academic"
-            title="Academic Management"
-          >
-            <span class="left"
-              ><span class="ic">🎓</span
-              ><span class="label">Academic Management</span></span
-            >
-            <span class="chev">›</span>
-          </button>
-          <div class="submenu" id="sub-academic">
-            <button
-              class="nav-item"
-              data-target="acalendar"
-              data-label="Academic Calendar"
-            >
-              <span class="label">Academic Calendar</span>
-            </button>
-            <button
-              class="nav-item"
-              data-target="courses"
-              data-label="Course Registration"
-            >
-              <span class="label">Course Registration</span>
-            </button>
-            <button
-              class="nav-item"
-              data-target="placeholder"
-              data-label="Registration/Exam Clearance"
-            >
-              <span class="label">Registration/Exam Clearance</span>
-            </button>
-            <button
-              class="nav-item"
-              data-target="placeholder"
-              data-label="Routine"
-            >
-              <span class="label">Routine</span>
-            </button>
-            <button
-              class="nav-item"
-              data-target="placeholder"
-              data-label="Teaching Evaluation"
-            >
-              <span class="label">Teaching Evaluation</span>
-            </button>
-            <button
-              class="nav-item"
-              data-target="placeholder"
-              data-label="Live Results"
-            >
-              <span class="label">Live Results</span>
-            </button>
-            <button
-              class="nav-item"
-              data-target="result"
-              data-label="Academic Results"
-            >
-              <span class="label">Academic Results</span>
-            </button>
-            <button
-              class="nav-item"
-              data-target="placeholder"
-              data-label="Certificates & Transcripts"
-            >
-              <span class="label">Certificates &amp; Transcripts</span>
-            </button>
-            <button
-              class="nav-item"
-              data-target="placeholder"
-              data-label="Convocation Application"
-            >
-              <span class="label">Convocation Application</span>
-            </button>
-          </div>
-
-          <button
-            class="nav-parent"
-            data-sub="finance"
-            title="Financial Service"
-          >
-            <span class="left"
-              ><span class="ic">🧾</span
-              ><span class="label">Financial Service</span></span
-            >
-            <span class="chev">›</span>
-          </button>
-          <div class="submenu" id="sub-finance">
-            <button
-              class="nav-item"
-              data-target="finance"
-              data-label="Payment Ledger"
-            >
-              <span class="label">Payment Ledger</span>
-            </button>
-            <button
-              class="nav-item"
-              data-target="waiver"
-              data-label="Scholarship & Waiver"
-            >
-              <span class="label">Scholarship &amp; Waiver</span>
-            </button>
-            <button
-              class="nav-item"
-              data-target="placeholder"
-              data-label="Financial Aid Circular"
-            >
-              <span class="label">Financial Aid Circular</span>
-            </button>
-            <button
-              class="nav-item"
-              data-target="placeholder"
-              data-label="Financial Aid Application"
-            >
-              <span class="label">Financial Aid Application</span>
-            </button>
-          </div>
-
-          <button
-            class="nav-item"
-            data-target="career"
-            data-label="Career Development"
-            title="Career Development"
-          >
-            <span class="ic">💼</span
-            ><span class="label">Career Development</span>
-          </button>
-
-          <button
-            class="nav-parent"
-            data-sub="services"
-            title="Student Services"
-          >
-            <span class="left"
-              ><span class="ic">🧑</span
-              ><span class="label">Student Services</span></span
-            >
-            <span class="chev">›</span>
-          </button>
-          <div class="submenu" id="sub-services">
-            <button
-              class="nav-item"
-              data-target="placeholder"
-              data-label="Transport Card"
-            >
-              <span class="label">Transport Card</span>
-            </button>
-            <button
-              class="nav-item"
-              data-target="placeholder"
-              data-label="Hall Management"
-            >
-              <span class="label">Hall Management</span>
-            </button>
-          </div>
-
-          <button
-            class="nav-item"
-            data-target="notice"
-            data-label="Notice Board"
-            title="Notice Board"
-          >
-            <span class="ic">📋</span><span class="label">Notice Board</span>
-          </button>
-          <button
-            class="nav-item"
-            data-target="facilities"
-            data-label="Facilities"
-            title="Facilities"
-          >
-            <span class="ic">#</span><span class="label">Facilities</span>
-          </button>
-          <button
-            class="nav-item"
-            data-target="placeholder"
-            data-label="Logout"
-            title="Logout"
-          >
-            <span class="ic">⎋</span><span class="label">Logout</span>
-          </button>
-        </nav>
-      </aside>
-
-      <div class="main">
-        <div class="topbar">
-          <button class="menu-btn" id="menuBtn">☰</button>
-          <div class="who">
-            <div class="nm">Pronoy Dass</div>
-            <div class="id">261-35-331</div>
-          </div>
+        <div class="landing-nav">
+          <a>Home</a>
+          <a>Student Application</a>
+          <a>DIU Smart Proctor</a>
         </div>
+      </div>
 
-        <div class="content">
-          <!-- DASHBOARD -->
-          <section class="section active" id="dashboard">
-            <div class="page-head">
-              <h2>Dashboard</h2>
-              <p>Student Portal</p>
+      <div class="landing-main">
+        <div class="landing-logo-big">
+          <div class="logo">DP</div>
+          <div class="txt">Daffodil<span>University</span></div>
+        </div>
+        <div class="landing-card">
+          <h2>Welcome to Student Portal</h2>
+          <button class="login-btn" onclick="showPage('loginPage')">
+            Log In
+          </button>
+        </div>
+      </div>
+
+      <div class="landing-footer">
+        © 2026 <b>DIU Student Portal</b>. All rights reserved.
+      </div>
+    </div>
+
+    <!-- ============ LOGIN PAGE ============ -->
+    <div id="loginPage" style="display: none">
+      <svg
+        class="login-network"
+        viewBox="0 0 1200 500"
+        preserveAspectRatio="none"
+      >
+        <g stroke="#B9CBEF" stroke-width="1" fill="none" opacity="0.7">
+          <line x1="100" y1="450" x2="400" y2="200" />
+          <line x1="400" y1="200" x2="700" y2="350" />
+          <line x1="700" y1="350" x2="1000" y2="150" />
+          <line x1="200" y1="480" x2="600" y2="300" />
+          <line x1="600" y1="300" x2="900" y2="450" />
+          <line x1="300" y1="250" x2="700" y2="350" />
+          <line x1="900" y1="450" x2="1150" y2="250" />
+        </g>
+        <g fill="#B9CBEF" opacity="0.8">
+          <circle cx="400" cy="200" r="4" />
+          <circle cx="700" cy="350" r="4" />
+          <circle cx="1000" cy="150" r="4" />
+          <circle cx="600" cy="300" r="4" />
+          <circle cx="900" cy="450" r="4" />
+          <circle cx="200" cy="480" r="4" />
+          <circle cx="1150" cy="250" r="4" />
+        </g>
+      </svg>
+
+      <div class="login-logo">
+        <div class="logo">DP</div>
+        <div class="txt">Daffodil<span>University</span></div>
+      </div>
+
+      <div class="login-card">
+        <h2>Sign in to your account</h2>
+        <div class="login-error" id="loginError">
+          Please enter both Student ID and Password.
+        </div>
+        <div class="login-field">
+          <label>Student ID or Registration ID</label>
+          <input type="text" id="loginId" placeholder="e.g. 261-35-331" />
+        </div>
+        <div class="login-field">
+          <label>Password</label>
+          <input type="password" id="loginPass" placeholder="••••••••••" />
+        </div>
+        <div class="login-row">
+          <label><input type="checkbox" id="rememberMe" /> Remember me</label>
+          <a
+            onclick="
+              alert(
+                'Frontend demo — connect this to your real password reset flow.',
+              )
+            "
+            >Forgot Password?</a
+          >
+        </div>
+        <button class="login-submit" onclick="doLogin()">Sign In</button>
+      </div>
+    </div>
+
+    <!-- ============ MAIN DASHBOARD APP ============ -->
+    <div id="appPage" style="display: none">
+      <div class="app">
+        <aside class="sidebar" id="sidebar">
+          <div class="brand">
+            <div class="logo">DP</div>
+            <div class="txt">
+              <div class="l1">Daffodil</div>
+              <div class="l2">Portal</div>
             </div>
+          </div>
 
-            <div class="profile-banner">
-              <div class="avatar">PD</div>
-              <div class="info">
-                <h3>Pronoy Dass</h3>
-                <div class="role">B.Sc. in Software Engineering</div>
-                <div class="badge">✓ Active</div>
-              </div>
-              <div class="profile-meta">
-                <div class="col">
-                  <div><span>ID:</span>02426105341331</div>
-                  <div><span>Reg:</span>261-35-331</div>
-                  <div><span>Batch:</span>48</div>
-                </div>
-                <div class="col">
-                  <div><span>Email:</span>261-35-331@diu.edu.bd</div>
-                  <div><span>Phone:</span>01873828082</div>
-                  <div><span>Campus:</span>DSC</div>
-                </div>
-                <div class="col">
-                  <div><span>DOB:</span>Apr 7, 2004</div>
-                  <div><span>Gender:</span>Male</div>
-                  <div><span>Blood:</span>AB+</div>
-                </div>
-              </div>
-            </div>
+          <nav class="nav-list" id="navList">
+            <button
+              class="nav-item active"
+              data-target="dashboard"
+              title="Dashboard"
+            >
+              <span class="ic">▦</span><span class="label">Dashboard</span>
+            </button>
 
-            <div class="panel-row">
-              <div class="panel">
-                <h4>Learning Resource</h4>
-                <div class="tile-row">
-                  <div class="tile" style="background: #3e3576">
-                    <span class="ic">📚</span>Library
-                  </div>
-                  <div class="tile" style="background: #1f8a5c">
-                    <span class="ic">🖥️</span>BLC
-                  </div>
-                  <div class="tile" style="background: #17a6c7">
-                    <span class="ic">🎓</span>Go Edu
-                  </div>
-                </div>
-              </div>
-              <div class="panel">
-                <h4>Student Service</h4>
-                <div class="tile-row">
-                  <div class="tile" style="background: #7a3fa0">
-                    <span class="ic">🚌</span>Transport Card
-                  </div>
-                  <div class="tile" style="background: #d0453f">
-                    <span class="ic">🏢</span>Hall Management
-                  </div>
-                  <div class="tile" style="background: #e0a72a">
-                    <span class="ic">💻</span>Laptop Scheme
-                  </div>
-                </div>
-              </div>
-              <div class="panel">
-                <h4>Academic</h4>
-                <div class="tile-row">
-                  <div class="tile" style="background: #232837">
-                    <span class="ic">📈</span>Live Result
-                  </div>
-                  <div class="tile" style="background: #5b4fc7">
-                    <span class="ic">🗓️</span>Routine
-                  </div>
-                  <div class="tile" style="background: #1fa87e">
-                    <span class="ic">🎓</span>Certificate
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-head"><h3>🗓️ Today's Routine — Friday</h3></div>
-              <div class="empty-note">No routine available for today.</div>
-            </div>
-
-            <div class="card">
-              <div class="card-head"><h3>Semester Wise Result</h3></div>
-              <div class="card-body">
-                <div class="chart-wrap">
-                  <div class="chart-legend">
-                    <span class="dot"></span> Semester-wise CGPA Performance
-                  </div>
-                  <div class="bars">
-                    <div class="y-axis">
-                      <span>0</span><span>1.0</span><span>2.0</span
-                      ><span>3.0</span><span>4.0</span>
-                    </div>
-                    <div class="bar-col">
-                      <div
-                        class="bar"
-                        style="height: 154px; background: #4cc97f"
-                      >
-                        3.52
-                      </div>
-                      <div class="lbl">Spring 2026</div>
-                    </div>
-                    <div class="bar-col">
-                      <div
-                        class="bar"
-                        style="height: 126px; background: #c77fd1"
-                      >
-                        2.85
-                      </div>
-                      <div class="lbl">Summer 2026</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- ACADEMIC RESULT -->
-          <section class="section" id="result">
-            <div class="page-head">
-              <h2>Academic Result</h2>
-            </div>
-
-            <div class="filter-row">
-              <span style="font-size: 12.5px; color: var(--muted)"
-                >Select Semester</span
+            <button
+              class="nav-parent"
+              data-sub="academic"
+              title="Academic Management"
+            >
+              <span class="left"
+                ><span class="ic">🎓</span
+                ><span class="label">Academic Management</span></span
               >
-              <select id="semSelect">
-                <option>Summer 2026, 262</option>
-                <option>Spring 2026, 261</option>
-              </select>
-              <button class="btn" onclick="renderResult()">Search</button>
+              <span class="chev">›</span>
+            </button>
+            <div class="submenu" id="sub-academic">
+              <button
+                class="nav-item"
+                data-target="acalendar"
+                data-label="Academic Calendar"
+              >
+                <span class="label">Academic Calendar</span>
+              </button>
+              <button
+                class="nav-item"
+                data-target="courses"
+                data-label="Course Registration"
+              >
+                <span class="label">Course Registration</span>
+              </button>
+              <button
+                class="nav-item"
+                data-target="examclearance"
+                data-label="Registration/Exam Clearance"
+              >
+                <span class="label">Registration/Exam Clearance</span>
+              </button>
+              <button
+                class="nav-item"
+                data-target="routine"
+                data-label="Routine"
+              >
+                <span class="label">Routine</span>
+              </button>
+              <button
+                class="nav-item"
+                data-target="teachingeval"
+                data-label="Teaching Evaluation"
+              >
+                <span class="label">Teaching Evaluation</span>
+              </button>
+              <button
+                class="nav-item"
+                data-target="liveresults"
+                data-label="Live Results"
+              >
+                <span class="label">Live Results</span>
+              </button>
+              <button
+                class="nav-item"
+                data-target="result"
+                data-label="Academic Results"
+              >
+                <span class="label">Academic Results</span>
+              </button>
+              <button
+                class="nav-item"
+                data-target="certificates"
+                data-label="Certificates & Transcripts"
+              >
+                <span class="label">Certificates &amp; Transcripts</span>
+              </button>
+              <button
+                class="nav-item"
+                data-target="convocation"
+                data-label="Convocation Application"
+              >
+                <span class="label">Convocation Application</span>
+              </button>
             </div>
 
-            <div class="two-col">
-              <div class="card">
-                <div class="card-head"><h3>👤 Student Information</h3></div>
-                <div class="student-info">
-                  <div class="nm" id="resName">Pronoy Dass</div>
-                  <div class="row">
-                    <span class="ic">🎓</span> B.Sc. in Software Engineering
+            <button
+              class="nav-parent"
+              data-sub="finance"
+              title="Financial Service"
+            >
+              <span class="left"
+                ><span class="ic">🧾</span
+                ><span class="label">Financial Service</span></span
+              >
+              <span class="chev">›</span>
+            </button>
+            <div class="submenu" id="sub-finance">
+              <button
+                class="nav-item"
+                data-target="finance"
+                data-label="Payment Ledger"
+              >
+                <span class="label">Payment Ledger</span>
+              </button>
+              <button
+                class="nav-item"
+                data-target="waiver"
+                data-label="Scholarship & Waiver"
+              >
+                <span class="label">Scholarship &amp; Waiver</span>
+              </button>
+              <button
+                class="nav-item"
+                data-target="aidcircular"
+                data-label="Financial Aid Circular"
+              >
+                <span class="label">Financial Aid Circular</span>
+              </button>
+              <button
+                class="nav-item"
+                data-target="aidapplication"
+                data-label="Financial Aid Application"
+              >
+                <span class="label">Financial Aid Application</span>
+              </button>
+            </div>
+
+            <button
+              class="nav-item"
+              data-target="career"
+              data-label="Career Development"
+              title="Career Development"
+            >
+              <span class="ic">💼</span
+              ><span class="label">Career Development</span>
+            </button>
+
+            <button
+              class="nav-parent"
+              data-sub="services"
+              title="Student Services"
+            >
+              <span class="left"
+                ><span class="ic">🧑</span
+                ><span class="label">Student Services</span></span
+              >
+              <span class="chev">›</span>
+            </button>
+            <div class="submenu" id="sub-services">
+              <button
+                class="nav-item"
+                data-target="placeholder"
+                data-label="Transport Card"
+              >
+                <span class="label">Transport Card</span>
+              </button>
+              <button
+                class="nav-item"
+                data-target="placeholder"
+                data-label="Hall Management"
+              >
+                <span class="label">Hall Management</span>
+              </button>
+            </div>
+
+            <button
+              class="nav-item"
+              data-target="notice"
+              data-label="Notice Board"
+              title="Notice Board"
+            >
+              <span class="ic">📋</span><span class="label">Notice Board</span>
+            </button>
+            <button
+              class="nav-item"
+              data-target="facilities"
+              data-label="Facilities"
+              title="Facilities"
+            >
+              <span class="ic">#</span><span class="label">Facilities</span>
+            </button>
+            <button
+              class="nav-item"
+              id="logoutNavBtn"
+              data-label="Logout"
+              title="Logout"
+            >
+              <span class="ic">⎋</span><span class="label">Logout</span>
+            </button>
+          </nav>
+        </aside>
+
+        <div class="main">
+          <div class="topbar">
+            <button class="menu-btn" id="menuBtn">☰</button>
+            <div class="who">
+              <div class="nm">Pronoy Dass</div>
+              <div class="id">261-35-331</div>
+            </div>
+          </div>
+
+          <div class="content">
+            <!-- DASHBOARD -->
+            <section class="section active" id="dashboard">
+              <div class="page-head">
+                <h2>Dashboard</h2>
+                <p>Student Portal</p>
+              </div>
+
+              <div class="profile-banner">
+                <div class="avatar">PD</div>
+                <div class="info">
+                  <h3>Pronoy Dass</h3>
+                  <div class="role">B.Sc. in Software Engineering</div>
+                  <div class="badge">✓ Active</div>
+                </div>
+                <div class="profile-meta">
+                  <div class="col">
+                    <div><span>ID:</span>02426105341331</div>
+                    <div><span>Reg:</span>261-35-331</div>
+                    <div><span>Batch:</span>48</div>
                   </div>
-                  <div class="row"><span class="ic">👥</span> Batch: 48</div>
-                  <div class="row">
-                    <span class="ic">🪪</span> Student ID: 02426105341331
+                  <div class="col">
+                    <div><span>Email:</span>261-35-331@diu.edu.bd</div>
+                    <div><span>Phone:</span>01873828082</div>
+                    <div><span>Campus:</span>DSC</div>
                   </div>
-                  <div class="row">
-                    <span class="ic">💳</span> Reg ID: 261-35-331
-                  </div>
-                  <div class="row">
-                    <span class="ic">ℹ️</span> SGPA of
-                    <span id="resSemLabel">Summer 2026, 262</span>:
-                    <b id="resSgpa">2.85</b>
+                  <div class="col">
+                    <div><span>DOB:</span>Apr 7, 2004</div>
+                    <div><span>Gender:</span>Male</div>
+                    <div><span>Blood:</span>AB+</div>
                   </div>
                 </div>
+              </div>
+
+              <div class="panel-row">
+                <div class="panel">
+                  <h4>Learning Resource</h4>
+                  <div class="tile-row">
+                    <div class="tile" style="background: #3e3576">
+                      <span class="ic">📚</span>Library
+                    </div>
+                    <div class="tile" style="background: #1f8a5c">
+                      <span class="ic">🖥️</span>BLC
+                    </div>
+                    <div class="tile" style="background: #17a6c7">
+                      <span class="ic">🎓</span>Go Edu
+                    </div>
+                  </div>
+                </div>
+                <div class="panel">
+                  <h4>Student Service</h4>
+                  <div class="tile-row">
+                    <div class="tile" style="background: #7a3fa0">
+                      <span class="ic">🚌</span>Transport Card
+                    </div>
+                    <div class="tile" style="background: #d0453f">
+                      <span class="ic">🏢</span>Hall Management
+                    </div>
+                    <div class="tile" style="background: #e0a72a">
+                      <span class="ic">💻</span>Laptop Scheme
+                    </div>
+                  </div>
+                </div>
+                <div class="panel">
+                  <h4>Academic</h4>
+                  <div class="tile-row">
+                    <div class="tile" style="background: #232837">
+                      <span class="ic">📈</span>Live Result
+                    </div>
+                    <div class="tile" style="background: #5b4fc7">
+                      <span class="ic">🗓️</span>Routine
+                    </div>
+                    <div class="tile" style="background: #1fa87e">
+                      <span class="ic">🎓</span>Certificate
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">
+                  <h3>🗓️ Today's Routine — Friday</h3>
+                </div>
+                <div class="empty-note">No routine available for today.</div>
+              </div>
+
+              <div class="card">
+                <div class="card-head"><h3>Semester Wise Result</h3></div>
+                <div class="card-body">
+                  <div class="chart-wrap">
+                    <div class="chart-legend">
+                      <span class="dot"></span> Semester-wise CGPA Performance
+                    </div>
+                    <div class="bars">
+                      <div class="y-axis">
+                        <span>0</span><span>1.0</span><span>2.0</span
+                        ><span>3.0</span><span>4.0</span>
+                      </div>
+                      <div class="bar-col">
+                        <div
+                          class="bar"
+                          style="height: 154px; background: #4cc97f"
+                        >
+                          3.52
+                        </div>
+                        <div class="lbl">Spring 2026</div>
+                      </div>
+                      <div class="bar-col">
+                        <div
+                          class="bar"
+                          style="height: 126px; background: #c77fd1"
+                        >
+                          2.85
+                        </div>
+                        <div class="lbl">Summer 2026</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- ACADEMIC RESULT -->
+            <section class="section" id="result">
+              <div class="page-head">
+                <h2>Academic Result</h2>
+              </div>
+
+              <div class="filter-row">
+                <span style="font-size: 12.5px; color: var(--muted)"
+                  >Select Semester</span
+                >
+                <select id="semSelect">
+                  <option>Summer 2026, 262</option>
+                  <option>Spring 2026, 261</option>
+                </select>
+                <button class="btn" onclick="renderResult()">Search</button>
+              </div>
+
+              <div class="two-col">
+                <div class="card">
+                  <div class="card-head"><h3>👤 Student Information</h3></div>
+                  <div class="student-info">
+                    <div class="nm" id="resName">Pronoy Dass</div>
+                    <div class="row">
+                      <span class="ic">🎓</span> B.Sc. in Software Engineering
+                    </div>
+                    <div class="row"><span class="ic">👥</span> Batch: 48</div>
+                    <div class="row">
+                      <span class="ic">🪪</span> Student ID: 02426105341331
+                    </div>
+                    <div class="row">
+                      <span class="ic">💳</span> Reg ID: 261-35-331
+                    </div>
+                    <div class="row">
+                      <span class="ic">ℹ️</span> SGPA of
+                      <span id="resSemLabel">Summer 2026, 262</span>:
+                      <b id="resSgpa">2.85</b>
+                    </div>
+                  </div>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>SL</th>
+                        <th>Course Code</th>
+                        <th>Course Title</th>
+                        <th>Credit</th>
+                        <th>Grade</th>
+                        <th>Grade Point</th>
+                      </tr>
+                    </thead>
+                    <tbody id="resultBody">
+                      <!-- filled by JS -->
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td colspan="3">Total Credit</td>
+                        <td id="totCredit">13.00</td>
+                        <td></td>
+                        <td>SGPA <span id="totSgpa">2.85</span></td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                  <div class="note-line">
+                    N.B.: If you see Teaching Evaluation Pending in any course,
+                    please complete <a href="#">Teaching Evaluation</a>.
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-head">
+                    <h3>UGC Uniform Grading System</h3>
+                  </div>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Marks (%)</th>
+                        <th>Grade</th>
+                        <th>Grade Point</th>
+                        <th>Remarks</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>80–100</td>
+                        <td>A+</td>
+                        <td>4.00</td>
+                        <td>Outstanding</td>
+                      </tr>
+                      <tr>
+                        <td>75–79</td>
+                        <td>A</td>
+                        <td>3.75</td>
+                        <td>Excellent</td>
+                      </tr>
+                      <tr>
+                        <td>70–74</td>
+                        <td>A-</td>
+                        <td>3.50</td>
+                        <td>Very Good</td>
+                      </tr>
+                      <tr>
+                        <td>65–69</td>
+                        <td>B+</td>
+                        <td>3.25</td>
+                        <td>Good</td>
+                      </tr>
+                      <tr>
+                        <td>60–64</td>
+                        <td>B</td>
+                        <td>3.00</td>
+                        <td>Satisfactory</td>
+                      </tr>
+                      <tr>
+                        <td>55–59</td>
+                        <td>B-</td>
+                        <td>2.75</td>
+                        <td>Above Average</td>
+                      </tr>
+                      <tr>
+                        <td>50–54</td>
+                        <td>C+</td>
+                        <td>2.50</td>
+                        <td>Average</td>
+                      </tr>
+                      <tr>
+                        <td>45–49</td>
+                        <td>C</td>
+                        <td>2.25</td>
+                        <td>Below Average</td>
+                      </tr>
+                      <tr>
+                        <td>40–44</td>
+                        <td>D</td>
+                        <td>2.00</td>
+                        <td>Pass</td>
+                      </tr>
+                      <tr>
+                        <td>00–39</td>
+                        <td>F</td>
+                        <td>0.00</td>
+                        <td>Fail</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+
+            <!-- PAYMENT LEDGER -->
+            <section class="section" id="finance">
+              <div class="summary-row">
+                <div class="summary-card">
+                  <div class="s-label">Registration Fee</div>
+                  <div class="s-value">36,550.00</div>
+                </div>
+                <div class="summary-card">
+                  <div class="s-label">Total Payable</div>
+                  <div class="s-value">183,900.00</div>
+                </div>
+                <div class="summary-card">
+                  <div class="s-label">Total Paid</div>
+                  <div class="s-value">220,500.00</div>
+                </div>
+                <div class="summary-card">
+                  <div class="s-label">Total Due</div>
+                  <div class="s-value">-36,600.00</div>
+                </div>
+                <div class="summary-card">
+                  <div class="s-label">Total Other</div>
+                  <div class="s-value">1,000.00</div>
+                </div>
+              </div>
+
+              <div class="page-head"><h2>Payment Ledger</h2></div>
+
+              <div class="filter-row">
+                <span style="font-size: 12.5px; color: var(--muted)"
+                  >Select Semester</span
+                >
+                <select id="ledgerSemSelect" onchange="renderLedger()">
+                  <option>Summer 2026, 262</option>
+                  <option>Spring 2026, 261</option>
+                </select>
+                <button class="btn" onclick="renderLedger()">Search</button>
+              </div>
+
+              <div class="card">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>SL</th>
+                      <th>Transaction Date</th>
+                      <th>Collected By</th>
+                      <th>Head Description</th>
+                      <th>Receivable</th>
+                      <th>Paid</th>
+                      <th>Other</th>
+                    </tr>
+                  </thead>
+                  <tbody id="ledgerBody"></tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="4">Total</td>
+                      <td id="ledgerTotReceivable"></td>
+                      <td id="ledgerTotPaid"></td>
+                      <td id="ledgerTotOther">0.00</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </section>
+
+            <!-- SCHOLARSHIP & WAIVER -->
+            <section class="section" id="waiver">
+              <div class="card">
+                <div class="card-head"><h3>🎓 Semester Waiver</h3></div>
+                <div class="waiver-empty">
+                  <div class="w-title">⚠ No Semester Waiver</div>
+                  <div class="w-sub">You have no Semester Waiver</div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-head"><h3>🎓 Fixed Waiver</h3></div>
+                <div class="waiver-empty">
+                  <div class="w-title">⚠ No Fixed Waiver Found</div>
+                  <div class="w-sub">You have no fixed waiver</div>
+                </div>
+              </div>
+            </section>
+
+            <!-- CAREER DEVELOPMENT -->
+            <section class="section" id="career">
+              <div class="link-section">
+                <h3 class="grp-title">Career Services</h3>
+                <div class="link-grid">
+                  <div class="link-card">
+                    <div class="badge-ic" style="background: #3e5c94">IN</div>
+                    <div class="lt">Internship</div>
+                    <div class="ls">Find internship opportunities.</div>
+                  </div>
+                  <div class="link-card">
+                    <div class="badge-ic" style="background: #2e6be6">CDC</div>
+                    <div class="lt">CDC</div>
+                    <div class="ls">Career Development Center.</div>
+                  </div>
+                  <div class="link-card">
+                    <div class="badge-ic" style="background: #d9455f">JU</div>
+                    <div class="lt">Job Utsob</div>
+                    <div class="ls">
+                      Explore job fairs &amp; recruitment events.
+                    </div>
+                  </div>
+                  <div class="link-card">
+                    <div class="badge-ic" style="background: #f2994a">SJ</div>
+                    <div class="lt">Skill Jobs</div>
+                    <div class="ls">Search jobs based on your skills.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="link-section">
+                <h3 class="grp-title">Learning Resources</h3>
+                <div class="link-grid">
+                  <div class="link-card">
+                    <div class="badge-ic" style="background: #1f8a5c">LB</div>
+                    <div class="lt">Library</div>
+                    <div class="ls">Access the digital library catalog.</div>
+                  </div>
+                  <div class="link-card">
+                    <div class="badge-ic" style="background: #17a6c7">BLC</div>
+                    <div class="lt">BLC</div>
+                    <div class="ls">Bright Language Center.</div>
+                  </div>
+                  <div class="link-card">
+                    <div class="badge-ic" style="background: #e0a72a">GE</div>
+                    <div class="lt">Go Edu</div>
+                    <div class="ls">
+                      Study abroad &amp; higher education services.
+                    </div>
+                  </div>
+                  <div class="link-card">
+                    <div class="badge-ic" style="background: #7a3fa0">IOU</div>
+                    <div class="lt">IOU</div>
+                    <div class="ls">
+                      International Opportunities &amp; collaborations.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- NOTICE BOARD -->
+            <section class="section" id="notice">
+              <div class="dept-tabs" id="deptTabs">
+                <div class="dept-tab active" data-dept="all">
+                  All Departments
+                </div>
+                <div class="dept-tab" data-dept="FSIT">
+                  FSIT <span class="cnt">6</span>
+                </div>
+                <div class="dept-tab" data-dept="FBE">
+                  FBE <span class="cnt">8</span>
+                </div>
+                <div class="dept-tab" data-dept="FHSS">
+                  FHSS <span class="cnt">9</span>
+                </div>
+                <div class="dept-tab" data-dept="ENGINEERING">
+                  ENGINEERING <span class="cnt">9</span>
+                </div>
+                <div class="dept-tab" data-dept="FHLS">
+                  FHLS <span class="cnt">6</span>
+                </div>
+                <div class="dept-tab" data-dept="FGS">
+                  FGS <span class="cnt">1</span>
+                </div>
+                <div class="dept-tab" data-dept="FAS">
+                  FAS <span class="cnt">2</span>
+                </div>
+                <div class="dept-tab" data-dept="INSTITUTIONAL">
+                  INSTITUTIONAL-PROGRAMS <span class="cnt">3</span>
+                </div>
+                <div class="dept-tab" data-dept="OFFICE">
+                  OFFICE <span class="cnt">9</span>
+                </div>
+              </div>
+
+              <div id="noticeList"></div>
+
+              <div class="pagination-row">
+                <div class="total">Total Notices: 3433</div>
+                <button class="page-btn">‹</button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <span style="color: var(--muted)">…</span>
+                <button class="page-btn">344</button>
+                <button class="page-btn">›</button>
+              </div>
+            </section>
+
+            <!-- FACILITIES -->
+            <section class="section" id="facilities">
+              <div class="page-head">
+                <h2>Student Benefits &amp; Services</h2>
+              </div>
+              <div class="facility-grid">
+                <div class="facility-card">
+                  <div class="f-ic">🏷️</div>
+                  <div class="ft">Discount Partners</div>
+                  <div class="fs">Exclusive student discounts</div>
+                </div>
+                <div class="facility-card">
+                  <div class="f-ic">🔴</div>
+                  <div class="ft">Google Workspace</div>
+                  <div class="fs">Email, Drive, Docs &amp; Meet</div>
+                </div>
+                <div class="facility-card">
+                  <div class="f-ic">🟦</div>
+                  <div class="ft">Microsoft 365</div>
+                  <div class="fs">Office Apps &amp; OneDrive</div>
+                </div>
+                <div class="facility-card">
+                  <div class="f-ic">⬛</div>
+                  <div class="ft">GitHub Student Pack</div>
+                  <div class="fs">Developer tools &amp; offers</div>
+                </div>
+
+                <div class="facility-card">
+                  <div class="f-ic">🟧</div>
+                  <div class="ft">JetBrains License</div>
+                  <div class="fs">Professional IDEs</div>
+                </div>
+                <div class="facility-card">
+                  <div class="f-ic">☁️</div>
+                  <div class="ft">Azure for Students</div>
+                  <div class="fs">Free cloud credits</div>
+                </div>
+                <div class="facility-card">
+                  <div class="f-ic">📮</div>
+                  <div class="ft">Postman</div>
+                  <div class="fs">API Development</div>
+                </div>
+                <div class="facility-card">
+                  <div class="f-ic">🍃</div>
+                  <div class="ft">MongoDB Atlas</div>
+                  <div class="fs">Cloud Database</div>
+                </div>
+
+                <div class="facility-card">
+                  <div class="f-ic">🎨</div>
+                  <div class="ft">Figma Education</div>
+                  <div class="fs">UI/UX Design</div>
+                </div>
+                <div class="facility-card">
+                  <div class="f-ic">🖌️</div>
+                  <div class="ft">Canva Education</div>
+                  <div class="fs">Graphic Design</div>
+                </div>
+                <div class="facility-card">
+                  <div class="f-ic">📐</div>
+                  <div class="ft">Autodesk</div>
+                  <div class="fs">Engineering &amp; CAD</div>
+                </div>
+                <div class="facility-card">
+                  <div class="f-ic">📊</div>
+                  <div class="ft">Tableau</div>
+                  <div class="fs">Data Visualization</div>
+                </div>
+
+                <div class="facility-card">
+                  <div class="f-ic">🖥️</div>
+                  <div class="ft">Miro</div>
+                  <div class="fs">Collaborative Whiteboard</div>
+                </div>
+                <div class="facility-card">
+                  <div class="f-ic">✅</div>
+                  <div class="ft">Asana</div>
+                  <div class="fs">Project Management</div>
+                </div>
+                <div class="facility-card">
+                  <div class="f-ic">🟢</div>
+                  <div class="ft">ClickUp</div>
+                  <div class="fs">Task Management</div>
+                </div>
+                <div class="facility-card">
+                  <div class="f-ic">📓</div>
+                  <div class="ft">Notion Plus</div>
+                  <div class="fs">Notes &amp; Workspace</div>
+                </div>
+
+                <div class="facility-card">
+                  <div class="f-ic">🤖</div>
+                  <div class="ft">Perplexity AI</div>
+                  <div class="fs">AI Search Assistant</div>
+                </div>
+                <div class="facility-card">
+                  <div class="f-ic">📦</div>
+                  <div class="ft">Amazon Prime Student</div>
+                  <div class="fs">Student Membership</div>
+                </div>
+                <div class="facility-card">
+                  <div class="f-ic">🎵</div>
+                  <div class="ft">Apple Music</div>
+                  <div class="fs">Student Plan</div>
+                </div>
+                <div class="facility-card">
+                  <div class="f-ic">🎧</div>
+                  <div class="ft">Spotify Student</div>
+                  <div class="fs">Premium Discount</div>
+                </div>
+              </div>
+            </section>
+
+            <!-- ACADEMIC CALENDAR -->
+            <section class="section" id="acalendar">
+              <div class="cal-header">
+                <h2>📅 Academic Calendar</h2>
+                <div class="cal-select">
+                  <select id="calSelect" onchange="renderCalendar()">
+                    <option value="">Select Academic Calendar</option>
+                    <option value="2025">Academic Calendar - 2025</option>
+                  </select>
+                </div>
+              </div>
+              <div id="calBody"></div>
+            </section>
+
+            <!-- COURSE REGISTRATION -->
+            <section class="section" id="courses">
+              <div class="page-head"><h2>Registered Course</h2></div>
+
+              <div class="filter-row">
+                <span style="font-size: 12.5px; color: var(--muted)"
+                  >Search Semester</span
+                >
+                <select id="courseSemSelect" onchange="renderCourses()">
+                  <!-- To add a new semester option, add one <option> line here
+                 AND add a matching entry in courseData in the script below. -->
+                  <option>Fall 2026, 263</option>
+                  <option>Summer 2026, 262</option>
+                  <option>Spring 2026, 261</option>
+                </select>
+                <button class="btn" onclick="renderCourses()">Search</button>
+              </div>
+
+              <div class="card">
                 <table>
                   <thead>
                     <tr>
@@ -1377,474 +2303,278 @@
                       <th>Course Code</th>
                       <th>Course Title</th>
                       <th>Credit</th>
-                      <th>Grade</th>
-                      <th>Grade Point</th>
+                      <th>Type</th>
+                      <th>Section</th>
+                      <th>Teacher</th>
                     </tr>
                   </thead>
-                  <tbody id="resultBody">
-                    <!-- filled by JS -->
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colspan="3">Total Credit</td>
-                      <td id="totCredit">13.00</td>
-                      <td></td>
-                      <td>SGPA <span id="totSgpa">2.85</span></td>
-                    </tr>
-                  </tfoot>
+                  <tbody id="courseBody"></tbody>
                 </table>
-                <div class="note-line">
-                  N.B.: If you see Teaching Evaluation Pending in any course,
-                  please complete <a href="#">Teaching Evaluation</a>.
-                </div>
               </div>
+            </section>
 
+            <!-- REGISTRATION / EXAM CLEARANCE -->
+            <section class="section" id="examclearance">
+              <div class="page-head"><h2>Registration/Exam Clearance</h2></div>
               <div class="card">
-                <div class="card-head"><h3>UGC Uniform Grading System</h3></div>
                 <table>
                   <thead>
                     <tr>
-                      <th>Marks (%)</th>
-                      <th>Grade</th>
-                      <th>Grade Point</th>
-                      <th>Remarks</th>
+                      <th>SL</th>
+                      <th>Semester</th>
+                      <th>Registration</th>
+                      <th>Mid-Term Exam</th>
+                      <th>Final Exam</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>80–100</td>
-                      <td>A+</td>
-                      <td>4.00</td>
-                      <td>Outstanding</td>
+                      <td>1</td>
+                      <td>Spring 2026 (261)</td>
+                      <td><span class="stat-ic yes">✓</span></td>
+                      <td><span class="stat-ic no">✕</span></td>
+                      <td><span class="stat-ic yes">✓</span></td>
                     </tr>
                     <tr>
-                      <td>75–79</td>
-                      <td>A</td>
-                      <td>3.75</td>
-                      <td>Excellent</td>
+                      <td>2</td>
+                      <td>Summer 2026 (262)</td>
+                      <td><span class="stat-ic yes">✓</span></td>
+                      <td><span class="stat-ic no">✕</span></td>
+                      <td><span class="stat-ic yes">✓</span></td>
                     </tr>
                     <tr>
-                      <td>70–74</td>
-                      <td>A-</td>
-                      <td>3.50</td>
-                      <td>Very Good</td>
-                    </tr>
-                    <tr>
-                      <td>65–69</td>
-                      <td>B+</td>
-                      <td>3.25</td>
-                      <td>Good</td>
-                    </tr>
-                    <tr>
-                      <td>60–64</td>
-                      <td>B</td>
-                      <td>3.00</td>
-                      <td>Satisfactory</td>
-                    </tr>
-                    <tr>
-                      <td>55–59</td>
-                      <td>B-</td>
-                      <td>2.75</td>
-                      <td>Above Average</td>
-                    </tr>
-                    <tr>
-                      <td>50–54</td>
-                      <td>C+</td>
-                      <td>2.50</td>
-                      <td>Average</td>
-                    </tr>
-                    <tr>
-                      <td>45–49</td>
-                      <td>C</td>
-                      <td>2.25</td>
-                      <td>Below Average</td>
-                    </tr>
-                    <tr>
-                      <td>40–44</td>
-                      <td>D</td>
-                      <td>2.00</td>
-                      <td>Pass</td>
-                    </tr>
-                    <tr>
-                      <td>00–39</td>
-                      <td>F</td>
-                      <td>0.00</td>
-                      <td>Fail</td>
+                      <td>3</td>
+                      <td>Fall 2026 (263)</td>
+                      <td><span class="stat-ic yes">✓</span></td>
+                      <td><span class="stat-ic no">✕</span></td>
+                      <td><span class="stat-ic no">✕</span></td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-            </div>
-          </section>
+            </section>
 
-          <!-- PAYMENT LEDGER -->
-          <section class="section" id="finance">
-            <div class="summary-row">
-              <div class="summary-card">
-                <div class="s-label">Registration Fee</div>
-                <div class="s-value">36,550.00</div>
-              </div>
-              <div class="summary-card">
-                <div class="s-label">Total Payable</div>
-                <div class="s-value">183,900.00</div>
-              </div>
-              <div class="summary-card">
-                <div class="s-label">Total Paid</div>
-                <div class="s-value">220,500.00</div>
-              </div>
-              <div class="summary-card">
-                <div class="s-label">Total Due</div>
-                <div class="s-value">-36,600.00</div>
-              </div>
-              <div class="summary-card">
-                <div class="s-label">Total Other</div>
-                <div class="s-value">1,000.00</div>
-              </div>
-            </div>
-
-            <div class="page-head"><h2>Payment Ledger</h2></div>
-
-            <div class="filter-row">
-              <span style="font-size: 12.5px; color: var(--muted)"
-                >Select Semester</span
-              >
-              <select id="ledgerSemSelect" onchange="renderLedger()">
-                <option>Summer 2026, 262</option>
-                <option>Spring 2026, 261</option>
-              </select>
-              <button class="btn" onclick="renderLedger()">Search</button>
-            </div>
-
-            <div class="card">
-              <table>
-                <thead>
-                  <tr>
-                    <th>SL</th>
-                    <th>Transaction Date</th>
-                    <th>Collected By</th>
-                    <th>Head Description</th>
-                    <th>Receivable</th>
-                    <th>Paid</th>
-                    <th>Other</th>
-                  </tr>
-                </thead>
-                <tbody id="ledgerBody"></tbody>
-                <tfoot>
-                  <tr>
-                    <td colspan="4">Total</td>
-                    <td id="ledgerTotReceivable"></td>
-                    <td id="ledgerTotPaid"></td>
-                    <td id="ledgerTotOther">0.00</td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-          </section>
-
-          <!-- SCHOLARSHIP & WAIVER -->
-          <section class="section" id="waiver">
-            <div class="card">
-              <div class="card-head"><h3>🎓 Semester Waiver</h3></div>
-              <div class="waiver-empty">
-                <div class="w-title">⚠ No Semester Waiver</div>
-                <div class="w-sub">You have no Semester Waiver</div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-head"><h3>🎓 Fixed Waiver</h3></div>
-              <div class="waiver-empty">
-                <div class="w-title">⚠ No Fixed Waiver Found</div>
-                <div class="w-sub">You have no fixed waiver</div>
-              </div>
-            </div>
-          </section>
-
-          <!-- CAREER DEVELOPMENT -->
-          <section class="section" id="career">
-            <div class="link-section">
-              <h3 class="grp-title">Career Services</h3>
-              <div class="link-grid">
-                <div class="link-card">
-                  <div class="badge-ic" style="background: #3e5c94">IN</div>
-                  <div class="lt">Internship</div>
-                  <div class="ls">Find internship opportunities.</div>
-                </div>
-                <div class="link-card">
-                  <div class="badge-ic" style="background: #2e6be6">CDC</div>
-                  <div class="lt">CDC</div>
-                  <div class="ls">Career Development Center.</div>
-                </div>
-                <div class="link-card">
-                  <div class="badge-ic" style="background: #d9455f">JU</div>
-                  <div class="lt">Job Utsob</div>
-                  <div class="ls">
-                    Explore job fairs &amp; recruitment events.
-                  </div>
-                </div>
-                <div class="link-card">
-                  <div class="badge-ic" style="background: #f2994a">SJ</div>
-                  <div class="lt">Skill Jobs</div>
-                  <div class="ls">Search jobs based on your skills.</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="link-section">
-              <h3 class="grp-title">Learning Resources</h3>
-              <div class="link-grid">
-                <div class="link-card">
-                  <div class="badge-ic" style="background: #1f8a5c">LB</div>
-                  <div class="lt">Library</div>
-                  <div class="ls">Access the digital library catalog.</div>
-                </div>
-                <div class="link-card">
-                  <div class="badge-ic" style="background: #17a6c7">BLC</div>
-                  <div class="lt">BLC</div>
-                  <div class="ls">Bright Language Center.</div>
-                </div>
-                <div class="link-card">
-                  <div class="badge-ic" style="background: #e0a72a">GE</div>
-                  <div class="lt">Go Edu</div>
-                  <div class="ls">
-                    Study abroad &amp; higher education services.
-                  </div>
-                </div>
-                <div class="link-card">
-                  <div class="badge-ic" style="background: #7a3fa0">IOU</div>
-                  <div class="lt">IOU</div>
-                  <div class="ls">
-                    International Opportunities &amp; collaborations.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- NOTICE BOARD -->
-          <section class="section" id="notice">
-            <div class="dept-tabs" id="deptTabs">
-              <div class="dept-tab active" data-dept="all">All Departments</div>
-              <div class="dept-tab" data-dept="FSIT">
-                FSIT <span class="cnt">6</span>
-              </div>
-              <div class="dept-tab" data-dept="FBE">
-                FBE <span class="cnt">8</span>
-              </div>
-              <div class="dept-tab" data-dept="FHSS">
-                FHSS <span class="cnt">9</span>
-              </div>
-              <div class="dept-tab" data-dept="ENGINEERING">
-                ENGINEERING <span class="cnt">9</span>
-              </div>
-              <div class="dept-tab" data-dept="FHLS">
-                FHLS <span class="cnt">6</span>
-              </div>
-              <div class="dept-tab" data-dept="FGS">
-                FGS <span class="cnt">1</span>
-              </div>
-              <div class="dept-tab" data-dept="FAS">
-                FAS <span class="cnt">2</span>
-              </div>
-              <div class="dept-tab" data-dept="INSTITUTIONAL">
-                INSTITUTIONAL-PROGRAMS <span class="cnt">3</span>
-              </div>
-              <div class="dept-tab" data-dept="OFFICE">
-                OFFICE <span class="cnt">9</span>
-              </div>
-            </div>
-
-            <div id="noticeList"></div>
-
-            <div class="pagination-row">
-              <div class="total">Total Notices: 3433</div>
-              <button class="page-btn">‹</button>
-              <button class="page-btn active">1</button>
-              <button class="page-btn">2</button>
-              <button class="page-btn">3</button>
-              <span style="color: var(--muted)">…</span>
-              <button class="page-btn">344</button>
-              <button class="page-btn">›</button>
-            </div>
-          </section>
-
-          <!-- FACILITIES -->
-          <section class="section" id="facilities">
-            <div class="page-head">
-              <h2>Student Benefits &amp; Services</h2>
-            </div>
-            <div class="facility-grid">
-              <div class="facility-card">
-                <div class="f-ic">🏷️</div>
-                <div class="ft">Discount Partners</div>
-                <div class="fs">Exclusive student discounts</div>
-              </div>
-              <div class="facility-card">
-                <div class="f-ic">🔴</div>
-                <div class="ft">Google Workspace</div>
-                <div class="fs">Email, Drive, Docs &amp; Meet</div>
-              </div>
-              <div class="facility-card">
-                <div class="f-ic">🟦</div>
-                <div class="ft">Microsoft 365</div>
-                <div class="fs">Office Apps &amp; OneDrive</div>
-              </div>
-              <div class="facility-card">
-                <div class="f-ic">⬛</div>
-                <div class="ft">GitHub Student Pack</div>
-                <div class="fs">Developer tools &amp; offers</div>
-              </div>
-
-              <div class="facility-card">
-                <div class="f-ic">🟧</div>
-                <div class="ft">JetBrains License</div>
-                <div class="fs">Professional IDEs</div>
-              </div>
-              <div class="facility-card">
-                <div class="f-ic">☁️</div>
-                <div class="ft">Azure for Students</div>
-                <div class="fs">Free cloud credits</div>
-              </div>
-              <div class="facility-card">
-                <div class="f-ic">📮</div>
-                <div class="ft">Postman</div>
-                <div class="fs">API Development</div>
-              </div>
-              <div class="facility-card">
-                <div class="f-ic">🍃</div>
-                <div class="ft">MongoDB Atlas</div>
-                <div class="fs">Cloud Database</div>
-              </div>
-
-              <div class="facility-card">
-                <div class="f-ic">🎨</div>
-                <div class="ft">Figma Education</div>
-                <div class="fs">UI/UX Design</div>
-              </div>
-              <div class="facility-card">
-                <div class="f-ic">🖌️</div>
-                <div class="ft">Canva Education</div>
-                <div class="fs">Graphic Design</div>
-              </div>
-              <div class="facility-card">
-                <div class="f-ic">📐</div>
-                <div class="ft">Autodesk</div>
-                <div class="fs">Engineering &amp; CAD</div>
-              </div>
-              <div class="facility-card">
-                <div class="f-ic">📊</div>
-                <div class="ft">Tableau</div>
-                <div class="fs">Data Visualization</div>
-              </div>
-
-              <div class="facility-card">
-                <div class="f-ic">🖥️</div>
-                <div class="ft">Miro</div>
-                <div class="fs">Collaborative Whiteboard</div>
-              </div>
-              <div class="facility-card">
-                <div class="f-ic">✅</div>
-                <div class="ft">Asana</div>
-                <div class="fs">Project Management</div>
-              </div>
-              <div class="facility-card">
-                <div class="f-ic">🟢</div>
-                <div class="ft">ClickUp</div>
-                <div class="fs">Task Management</div>
-              </div>
-              <div class="facility-card">
-                <div class="f-ic">📓</div>
-                <div class="ft">Notion Plus</div>
-                <div class="fs">Notes &amp; Workspace</div>
-              </div>
-
-              <div class="facility-card">
-                <div class="f-ic">🤖</div>
-                <div class="ft">Perplexity AI</div>
-                <div class="fs">AI Search Assistant</div>
-              </div>
-              <div class="facility-card">
-                <div class="f-ic">📦</div>
-                <div class="ft">Amazon Prime Student</div>
-                <div class="fs">Student Membership</div>
-              </div>
-              <div class="facility-card">
-                <div class="f-ic">🎵</div>
-                <div class="ft">Apple Music</div>
-                <div class="fs">Student Plan</div>
-              </div>
-              <div class="facility-card">
-                <div class="f-ic">🎧</div>
-                <div class="ft">Spotify Student</div>
-                <div class="fs">Premium Discount</div>
-              </div>
-            </div>
-          </section>
-
-          <!-- ACADEMIC CALENDAR -->
-          <section class="section" id="acalendar">
-            <div class="cal-header">
-              <h2>📅 Academic Calendar</h2>
-              <div class="cal-select">
-                <select id="calSelect" onchange="renderCalendar()">
-                  <option value="">Select Academic Calendar</option>
-                  <option value="2025">Academic Calendar - 2025</option>
+            <!-- ROUTINE -->
+            <section class="section" id="routine">
+              <div class="page-head"><h2>Routine</h2></div>
+              <div class="filter-row">
+                <span style="font-size: 12.5px; color: var(--muted)"
+                  >Select Semester</span
+                >
+                <select id="routineSemSelect" onchange="renderRoutine()">
+                  <option value="">Select Semester</option>
+                  <option>Spring 2027, 271</option>
+                  <option>Fall 2026, 263</option>
+                  <option>Summer 2026, 262</option>
+                  <option>Spring 2026, 261</option>
+                  <option>Short 2025, 254</option>
+                  <option>Fall 2025, 253</option>
+                  <option>Summer 2025, 252</option>
                 </select>
+                <button class="btn" onclick="renderRoutine()">Search</button>
               </div>
-            </div>
-            <div id="calBody"></div>
-          </section>
+              <div id="routineBody"></div>
+            </section>
 
-          <!-- COURSE REGISTRATION -->
-          <section class="section" id="courses">
-            <div class="page-head"><h2>Registered Course</h2></div>
-
-            <div class="filter-row">
-              <span style="font-size: 12.5px; color: var(--muted)"
-                >Search Semester</span
-              >
-              <select id="courseSemSelect" onchange="renderCourses()">
-                <!-- To add a new semester option, add one <option> line here
-                 AND add a matching entry in courseData in the script below. -->
-                <option>Fall 2026, 263</option>
-                <option>Summer 2026, 262</option>
-                <option>Spring 2026, 261</option>
-              </select>
-              <button class="btn" onclick="renderCourses()">Search</button>
-            </div>
-
-            <div class="card">
-              <table>
-                <thead>
-                  <tr>
-                    <th>SL</th>
-                    <th>Course Code</th>
-                    <th>Course Title</th>
-                    <th>Credit</th>
-                    <th>Type</th>
-                    <th>Section</th>
-                    <th>Teacher</th>
-                  </tr>
-                </thead>
-                <tbody id="courseBody"></tbody>
-              </table>
-            </div>
-          </section>
-
-          <!-- PLACEHOLDER for other menu items -->
-          <section class="section" id="placeholder">
-            <div class="page-head"><h2 id="placeholderTitle">Section</h2></div>
-            <div class="card">
-              <div class="empty-note">
-                This section is a frontend placeholder — connect it to real data
-                or build it out further when you're ready.
+            <!-- TEACHING EVALUATION -->
+            <section class="section" id="teachingeval">
+              <div class="page-head"><h2>Teaching Evaluation</h2></div>
+              <div class="filter-row">
+                <span style="font-size: 12.5px; color: var(--muted)"
+                  >Select Semester</span
+                >
+                <select id="evalSemSelect" onchange="renderEval()">
+                  <option>Summer 2026, 262</option>
+                  <option>Spring 2026, 261</option>
+                </select>
+                <button class="btn" onclick="renderEval()">Search</button>
               </div>
-            </div>
-          </section>
+              <div class="card">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Submit Status</th>
+                      <th>Course</th>
+                      <th>Section</th>
+                      <th>Teacher</th>
+                    </tr>
+                  </thead>
+                  <tbody id="evalBody"></tbody>
+                </table>
+              </div>
+            </section>
+
+            <!-- LIVE RESULTS -->
+            <section class="section" id="liveresults">
+              <div class="page-head"><h2>Live Result</h2></div>
+              <div class="filter-row">
+                <span style="font-size: 12.5px; color: var(--muted)"
+                  >Select Semester</span
+                >
+                <select id="liveSemSelect" onchange="renderLive()">
+                  <option>Summer 2026, 262</option>
+                  <option>Spring 2026, 261</option>
+                </select>
+                <button class="btn" onclick="renderLive()">Search</button>
+              </div>
+              <div class="card">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Action</th>
+                      <th>SL</th>
+                      <th>Course Code</th>
+                      <th>Course Title</th>
+                      <th>Credit</th>
+                      <th>Section</th>
+                      <th>Teacher</th>
+                    </tr>
+                  </thead>
+                  <tbody id="liveBody"></tbody>
+                </table>
+              </div>
+            </section>
+
+            <!-- CERTIFICATES & TRANSCRIPTS -->
+            <section class="section" id="certificates">
+              <div class="page-head-row">
+                <h2 style="font-size: 20px; font-weight: 700; margin: 0">
+                  Application List
+                </h2>
+                <button
+                  class="apply-btn"
+                  onclick="
+                    alert(
+                      'Frontend demo — connect this to your real application form.',
+                    )
+                  "
+                >
+                  Apply New
+                </button>
+              </div>
+              <div class="card">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>SL</th>
+                      <th>Apply Date</th>
+                      <th>Delivery Date</th>
+                      <th>Paid Amount</th>
+                      <th>Status</th>
+                      <th>Detail</th>
+                    </tr>
+                  </thead>
+                  <tbody id="certBody"></tbody>
+                </table>
+              </div>
+            </section>
+
+            <!-- CONVOCATION APPLICATION -->
+            <section class="section" id="convocation">
+              <div class="page-head"><h2>Convocation Apply</h2></div>
+              <div class="card">
+                <div class="not-eligible">
+                  You are not eligible for Convocation !
+                </div>
+              </div>
+            </section>
+
+            <!-- FINANCIAL AID CIRCULAR -->
+            <section class="section" id="aidcircular">
+              <div id="aidToast" class="toast">⚠ Data not Found!!</div>
+              <div class="page-head"><h2>🎓 Available Scholarships</h2></div>
+              <div class="empty-state">
+                <div class="ic">ℹ</div>
+                <div class="msg">No Scholarships Available</div>
+              </div>
+            </section>
+
+            <!-- FINANCIAL AID APPLICATION -->
+            <section class="section" id="aidapplication">
+              <div class="page-head">
+                <h2>Applied Scholarship Application</h2>
+              </div>
+              <div class="card">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Action</th>
+                      <th>Status</th>
+                      <th>SL</th>
+                      <th>Application ID</th>
+                      <th>Applicant Name</th>
+                      <th>Student ID</th>
+                      <th>Registration ID</th>
+                      <th>Semester</th>
+                      <th>Scholarship Type</th>
+                      <th>Application Fee</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td
+                        colspan="10"
+                        style="text-align: center; color: var(--muted)"
+                      >
+                        No application available
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <!-- PLACEHOLDER for other menu items -->
+            <section class="section" id="placeholder">
+              <div class="page-head">
+                <h2 id="placeholderTitle">Section</h2>
+              </div>
+              <div class="card">
+                <div class="empty-note">
+                  This section is a frontend placeholder — connect it to real
+                  data or build it out further when you're ready.
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
       </div>
     </div>
+    <!-- /#appPage -->
 
     <script>
+      // ============ PAGE NAVIGATION (Landing / Login / Dashboard) ============
+      function showPage(id) {
+        ;['landingPage', 'loginPage', 'appPage'].forEach((p) => {
+          document.getElementById(p).style.display =
+            p === id ? (p === 'appPage' ? 'block' : 'flex') : 'none'
+        })
+      }
+
+      function doLogin() {
+        const id = document.getElementById('loginId').value.trim()
+        const pass = document.getElementById('loginPass').value.trim()
+        const err = document.getElementById('loginError')
+        if (!id || !pass) {
+          err.style.display = 'block'
+          return
+        }
+        err.style.display = 'none'
+        // Frontend-only demo: any non-empty ID/password logs in.
+        // Connect this to a real authentication API for production use.
+        showPage('appPage')
+      }
+
+      // allow pressing Enter in the password field to submit
+      document.addEventListener('DOMContentLoaded', () => {
+        const passField = document.getElementById('loginPass')
+        if (passField) {
+          passField.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') doLogin()
+          })
+        }
+      })
+
       const navButtons = document.querySelectorAll('.nav-item')
       const sections = document.querySelectorAll('.section')
       const sidebar = document.getElementById('sidebar')
@@ -1877,6 +2607,8 @@
       navButtons.forEach((btn) => {
         btn.addEventListener('click', () => {
           const target = btn.dataset.target
+          if (!target) return // e.g. the Logout button, handled separately below
+
           navButtons.forEach((b) => b.classList.remove('active'))
           btn.classList.add('active')
 
@@ -1888,6 +2620,14 @@
           }
           sidebar.classList.remove('open')
         })
+      })
+
+      document.getElementById('logoutNavBtn').addEventListener('click', () => {
+        // reset login form and go back to the landing page
+        document.getElementById('loginId').value = ''
+        document.getElementById('loginPass').value = ''
+        document.getElementById('loginError').style.display = 'none'
+        showPage('landingPage')
       })
 
       menuBtn.addEventListener('click', () => {
@@ -2432,6 +3172,185 @@
           : '<tr><td colspan="7" style="text-align:center; color:var(--muted);">No courses found for this semester.</td></tr>'
       }
       renderCourses()
+
+      // ---------------- ROUTINE ----------------
+      const routineData = {
+        'Summer 2026, 262': [
+          [
+            'Saturday',
+            '09:00 AM - 10:30 AM',
+            'MAT101 - Mathematics I',
+            '47_C',
+            'Md. Mozammelul Haque',
+          ],
+          [
+            'Saturday',
+            '10:40 AM - 12:10 PM',
+            'SE121 - Structured Programming',
+            '47_C',
+            'Md. Minhazul Islam Royel',
+          ],
+          [
+            'Sunday',
+            '09:00 AM - 10:30 AM',
+            'PHY101 - Physics I',
+            '47_C',
+            'Shahina Haque',
+          ],
+          [
+            'Monday',
+            '01:00 PM - 03:00 PM',
+            'SE122 - Structured Programming Lab',
+            '47_C2',
+            'Md. Mazbaur Rashid',
+          ],
+          [
+            'Tuesday',
+            '09:00 AM - 10:30 AM',
+            'SE212 - Software Requirement Specifications & Analysis',
+            '47_C',
+            'Ms. Jakia Khanom',
+          ],
+        ],
+        // Add more semesters here in the same format:
+        // "Semester Name, Code": [ [Day, Time, "Course Code - Course Title", Section, Teacher], ... ]
+      }
+
+      function renderRoutine() {
+        const sem = document.getElementById('routineSemSelect').value
+        const body = document.getElementById('routineBody')
+        if (!sem) {
+          body.innerHTML =
+            '<div class="cal-empty" style="border:1px solid var(--border); border-radius:var(--radius);">No items found</div>'
+          return
+        }
+        const rows = routineData[sem]
+        if (!rows) {
+          body.innerHTML =
+            '<div class="cal-empty" style="border:1px solid var(--border); border-radius:var(--radius);">No routine available for this semester.</div>'
+          return
+        }
+        body.innerHTML = `
+      <div class="card">
+        <table>
+          <thead><tr><th>Day</th><th>Time</th><th>Course</th><th>Section</th><th>Teacher</th></tr></thead>
+          <tbody>
+            ${rows.map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    `
+      }
+      renderRoutine()
+
+      // ---------------- TEACHING EVALUATION ----------------
+      const evalData = {
+        'Summer 2026, 262': [
+          ['Mathematics I, MAT 101', '47_C', 'Md. Mozammelul Haque'],
+          [
+            'Structured Programming, SE 121',
+            '47_C',
+            'Md. Minhazul Islam Royel',
+          ],
+          ['Structured Programming Lab, SE 122', '47_C2', 'Md. Mazbaur Rashid'],
+          ['Physics I, PHY 101', '47_C', 'Shahina Haque'],
+          [
+            'Software Requirement Specifications & Analysis, SE 212',
+            '47_C',
+            'Ms. Jakia Khanom',
+          ],
+        ],
+        'Spring 2026, 261': [
+          ['Database Systems, CSE311', '48_F', 'Dr. Anisur Rahman'],
+          ['Database Systems Lab, CSE312', '48_F2', 'Dr. Anisur Rahman'],
+          ['Operating Systems, CSE315', '48_F', 'Ms. Farhana Islam'],
+        ],
+      }
+
+      function renderEval() {
+        const sem = document.getElementById('evalSemSelect').value
+        const rows = evalData[sem] || []
+        document.getElementById('evalBody').innerHTML = rows
+          .map(
+            (r) =>
+              `<tr><td><span class="badge-submitted">Submitted</span></td><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`,
+          )
+          .join('')
+      }
+      renderEval()
+
+      // ---------------- LIVE RESULTS ----------------
+      const liveData = {
+        'Summer 2026, 262': [
+          [1, 'MAT101', 'Mathematics I', '3', '47_C', 'Md. Mozammelul Haque'],
+          [
+            2,
+            'SE121',
+            'Structured Programming',
+            '3',
+            '47_C',
+            'Md. Minhazul Islam Royel',
+          ],
+          [
+            3,
+            'SE122',
+            'Structured Programming Lab',
+            '1',
+            '47_C2',
+            'Md. Mazbaur Rashid',
+          ],
+          [4, 'PHY101', 'Physics I', '3', '47_C', 'Shahina Haque'],
+          [
+            5,
+            'SE212',
+            'Software Requirement Specifications & Analysis',
+            '3',
+            '47_C',
+            'Ms. Jakia Khanom',
+          ],
+        ],
+        'Spring 2026, 261': [
+          [1, 'CSE311', 'Database Systems', '3', '48_F', 'Dr. Anisur Rahman'],
+          [
+            2,
+            'CSE312',
+            'Database Systems Lab',
+            '1',
+            '48_F2',
+            'Dr. Anisur Rahman',
+          ],
+          [3, 'CSE315', 'Operating Systems', '3', '48_F', 'Ms. Farhana Islam'],
+        ],
+      }
+
+      function renderLive() {
+        const sem = document.getElementById('liveSemSelect').value
+        const rows = liveData[sem] || []
+        document.getElementById('liveBody').innerHTML = rows
+          .map(
+            (r) =>
+              `<tr>
+        <td><button class="view-btn" onclick="alert('Frontend demo — connect this to your real result data.')">👁 View Result</button></td>
+        <td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td>
+      </tr>`,
+          )
+          .join('')
+      }
+      renderLive()
+
+      // Financial Aid Circular toast: show briefly each time the page is opened
+      navButtons.forEach((btn) => {
+        if (btn.dataset.target === 'aidcircular') {
+          btn.addEventListener('click', () => {
+            const toast = document.getElementById('aidToast')
+            toast.style.display = 'flex'
+            clearTimeout(window._aidToastTimer)
+            window._aidToastTimer = setTimeout(() => {
+              toast.style.display = 'none'
+            }, 3000)
+          })
+        }
+      })
     </script>
   </body>
 </html>
