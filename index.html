@@ -10,9 +10,9 @@
     />
     <style>
       :root {
-        --sidebar: #1b2a47;
-        --sidebar-hover: #243863;
-        --sidebar-text: #b7c1d9;
+        --sidebar: #131e36;
+        --sidebar-hover: #1d2c4d;
+        --sidebar-text: #9aa6c2;
         --accent-blue: #2e6be6;
         --accent-green: #2fa84f;
         --bg: #f2f3f7;
@@ -128,8 +128,9 @@
         color: #fff;
       }
       .nav-item.active {
-        background: var(--accent-blue);
+        background: none;
         color: #fff;
+        font-weight: 700;
       }
       .nav-parent {
         justify-content: space-between;
@@ -161,10 +162,24 @@
         font-size: 13px;
         padding: 8px 12px 8px 30px;
         color: #9aa5be;
+        position: relative;
+      }
+      .submenu .nav-item::before {
+        content: '•';
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #5a6685;
+        font-size: 14px;
+      }
+      .submenu .nav-item.active::before {
+        color: #fff;
       }
       .submenu .nav-item.active {
-        background: var(--accent-blue);
+        background: none;
         color: #fff;
+        font-weight: 700;
       }
       .submenu .nav-item:hover {
         color: #fff;
@@ -538,6 +553,7 @@
       }
       .student-info .row {
         display: flex;
+        align-items: center;
         gap: 8px;
         font-size: 13px;
         color: var(--ink);
@@ -545,6 +561,8 @@
       }
       .student-info .row .ic {
         color: var(--muted);
+        width: 16px;
+        text-align: center;
       }
       table {
         width: 100%;
@@ -700,6 +718,18 @@
         .link-grid {
           grid-template-columns: repeat(2, 1fr);
         }
+      }
+
+      /* allow tiles/cards to be real links while keeping identical appearance */
+      a.tile,
+      a.link-card,
+      a.facility-card {
+        text-decoration: none;
+        color: inherit;
+      }
+      a.link-card,
+      a.facility-card {
+        display: block;
       }
 
       /* Notice board */
@@ -1352,6 +1382,64 @@
         display: none;
       }
 
+      /* ============ LOADING SPINNER (shown after clicking Search) ============ */
+      .spinner {
+        width: 30px;
+        height: 30px;
+        margin: 0 auto;
+        border: 3px solid #e3e7f0;
+        border-top-color: var(--accent-blue);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .spinner-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 40px 20px;
+      }
+      .spinner-wrap .spinner-label {
+        font-size: 12.5px;
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      /* small extra polish: button press feedback + table row fade-in */
+      .btn,
+      .apply-btn,
+      .login-submit,
+      .view-btn {
+        transition:
+          background 0.15s ease,
+          transform 0.1s ease;
+      }
+      .btn:active,
+      .apply-btn:active,
+      .login-submit:active,
+      .view-btn:active {
+        transform: scale(0.96);
+      }
+      @keyframes rowFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      tbody tr {
+        animation: rowFadeIn 0.25s ease;
+      }
+
       @media (max-width: 900px) {
         .app {
           grid-template-columns: 1fr;
@@ -1727,15 +1815,30 @@
                 <div class="panel">
                   <h4>Learning Resource</h4>
                   <div class="tile-row">
-                    <div class="tile" style="background: #3e3576">
-                      <span class="ic">📚</span>Library
-                    </div>
-                    <div class="tile" style="background: #1f8a5c">
-                      <span class="ic">🖥️</span>BLC
-                    </div>
-                    <div class="tile" style="background: #17a6c7">
-                      <span class="ic">🎓</span>Go Edu
-                    </div>
+                    <a
+                      class="tile"
+                      href="https://opac.daffodilvarsity.edu.bd/cgi-bin/koha/opac-main.pl"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style="background: #3e3576"
+                      ><span class="ic">📚</span>Library</a
+                    >
+                    <a
+                      class="tile"
+                      href="https://elearn.daffodilvarsity.edu.bd/?redirect=0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style="background: #1f8a5c"
+                      ><span class="ic">🖥️</span>BLC</a
+                    >
+                    <a
+                      class="tile"
+                      href="https://goedu.ac"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style="background: #17a6c7"
+                      ><span class="ic">🎓</span>Go Edu</a
+                    >
                   </div>
                 </div>
                 <div class="panel">
@@ -1755,13 +1858,25 @@
                 <div class="panel">
                   <h4>Academic</h4>
                   <div class="tile-row">
-                    <div class="tile" style="background: #232837">
+                    <div
+                      class="tile"
+                      onclick="goToNav('liveresults')"
+                      style="background: #232837"
+                    >
                       <span class="ic">📈</span>Live Result
                     </div>
-                    <div class="tile" style="background: #5b4fc7">
+                    <div
+                      class="tile"
+                      onclick="goToNav('routine')"
+                      style="background: #5b4fc7"
+                    >
                       <span class="ic">🗓️</span>Routine
                     </div>
-                    <div class="tile" style="background: #1fa87e">
+                    <div
+                      class="tile"
+                      onclick="goToNav('certificates')"
+                      style="background: #1fa87e"
+                    >
                       <span class="ic">🎓</span>Certificate
                     </div>
                   </div>
@@ -1822,59 +1937,24 @@
                   >Select Semester</span
                 >
                 <select id="semSelect">
+                  <option value="">Select Semester</option>
                   <option>Summer 2026, 262</option>
                   <option>Spring 2026, 261</option>
                 </select>
-                <button class="btn" onclick="renderResult()">Search</button>
+                <button
+                  class="btn"
+                  onclick="withSearchLoading('resultCard', false, renderResult)"
+                >
+                  Search
+                </button>
               </div>
 
               <div class="two-col">
-                <div class="card">
-                  <div class="card-head"><h3>👤 Student Information</h3></div>
-                  <div class="student-info">
-                    <div class="nm" id="resName">Pronoy Dass</div>
-                    <div class="row">
-                      <span class="ic">🎓</span> B.Sc. in Software Engineering
+                <div id="resultCard">
+                  <div class="card">
+                    <div class="empty-note" style="padding: 40px 20px">
+                      Select a semester and click Search to view your result.
                     </div>
-                    <div class="row"><span class="ic">👥</span> Batch: 48</div>
-                    <div class="row">
-                      <span class="ic">🪪</span> Student ID: 02426105341331
-                    </div>
-                    <div class="row">
-                      <span class="ic">💳</span> Reg ID: 261-35-331
-                    </div>
-                    <div class="row">
-                      <span class="ic">ℹ️</span> SGPA of
-                      <span id="resSemLabel">Summer 2026, 262</span>:
-                      <b id="resSgpa">2.85</b>
-                    </div>
-                  </div>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>SL</th>
-                        <th>Course Code</th>
-                        <th>Course Title</th>
-                        <th>Credit</th>
-                        <th>Grade</th>
-                        <th>Grade Point</th>
-                      </tr>
-                    </thead>
-                    <tbody id="resultBody">
-                      <!-- filled by JS -->
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <td colspan="3">Total Credit</td>
-                        <td id="totCredit">13.00</td>
-                        <td></td>
-                        <td>SGPA <span id="totSgpa">2.85</span></td>
-                      </tr>
-                    </tfoot>
-                  </table>
-                  <div class="note-line">
-                    N.B.: If you see Teaching Evaluation Pending in any course,
-                    please complete <a href="#">Teaching Evaluation</a>.
                   </div>
                 </div>
 
@@ -1989,11 +2069,16 @@
                 <span style="font-size: 12.5px; color: var(--muted)"
                   >Select Semester</span
                 >
-                <select id="ledgerSemSelect" onchange="renderLedger()">
+                <select id="ledgerSemSelect">
                   <option>Summer 2026, 262</option>
                   <option>Spring 2026, 261</option>
                 </select>
-                <button class="btn" onclick="renderLedger()">Search</button>
+                <button
+                  class="btn"
+                  onclick="withSearchLoading('ledgerBody', true, renderLedger)"
+                >
+                  Search
+                </button>
               </div>
 
               <div class="card">
@@ -2045,58 +2130,98 @@
               <div class="link-section">
                 <h3 class="grp-title">Career Services</h3>
                 <div class="link-grid">
-                  <div class="link-card">
+                  <a
+                    class="link-card"
+                    href="https://internship.daffodilvarsity.edu.bd/?app=home"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <div class="badge-ic" style="background: #3e5c94">IN</div>
                     <div class="lt">Internship</div>
                     <div class="ls">Find internship opportunities.</div>
-                  </div>
-                  <div class="link-card">
+                  </a>
+                  <a
+                    class="link-card"
+                    href="https://cdc.daffodilvarsity.edu.bd"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <div class="badge-ic" style="background: #2e6be6">CDC</div>
                     <div class="lt">CDC</div>
                     <div class="ls">Career Development Center.</div>
-                  </div>
-                  <div class="link-card">
+                  </a>
+                  <a
+                    class="link-card"
+                    href="https://jobutsob.daffodilvarsity.edu.bd"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <div class="badge-ic" style="background: #d9455f">JU</div>
                     <div class="lt">Job Utsob</div>
                     <div class="ls">
                       Explore job fairs &amp; recruitment events.
                     </div>
-                  </div>
-                  <div class="link-card">
+                  </a>
+                  <a
+                    class="link-card"
+                    href="https://skill.jobs"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <div class="badge-ic" style="background: #f2994a">SJ</div>
                     <div class="lt">Skill Jobs</div>
                     <div class="ls">Search jobs based on your skills.</div>
-                  </div>
+                  </a>
                 </div>
               </div>
 
               <div class="link-section">
                 <h3 class="grp-title">Learning Resources</h3>
                 <div class="link-grid">
-                  <div class="link-card">
+                  <a
+                    class="link-card"
+                    href="https://opac.daffodilvarsity.edu.bd/cgi-bin/koha/opac-main.pl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <div class="badge-ic" style="background: #1f8a5c">LB</div>
                     <div class="lt">Library</div>
                     <div class="ls">Access the digital library catalog.</div>
-                  </div>
-                  <div class="link-card">
+                  </a>
+                  <a
+                    class="link-card"
+                    href="https://elearn.daffodilvarsity.edu.bd/?redirect=0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <div class="badge-ic" style="background: #17a6c7">BLC</div>
                     <div class="lt">BLC</div>
                     <div class="ls">Bright Language Center.</div>
-                  </div>
-                  <div class="link-card">
+                  </a>
+                  <a
+                    class="link-card"
+                    href="https://goedu.ac"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <div class="badge-ic" style="background: #e0a72a">GE</div>
                     <div class="lt">Go Edu</div>
                     <div class="ls">
                       Study abroad &amp; higher education services.
                     </div>
-                  </div>
-                  <div class="link-card">
+                  </a>
+                  <a
+                    class="link-card"
+                    href="https://iou.edu.gm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <div class="badge-ic" style="background: #7a3fa0">IOU</div>
                     <div class="lt">IOU</div>
                     <div class="ls">
                       International Opportunities &amp; collaborations.
                     </div>
-                  </div>
+                  </a>
                 </div>
               </div>
             </section>
@@ -2156,110 +2281,190 @@
                 <h2>Student Benefits &amp; Services</h2>
               </div>
               <div class="facility-grid">
-                <div class="facility-card">
-                  <div class="f-ic">🏷️</div>
+                <a
+                  class="facility-card"
+                  href="https://daffodilvarsity.edu.bd/discount-partners/1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">🏷️</div>
                   <div class="ft">Discount Partners</div>
-                  <div class="fs">Exclusive student discounts</div>
-                </div>
-                <div class="facility-card">
-                  <div class="f-ic">🔴</div>
+                  <div class="fs">Exclusive student discounts</div></a
+                >
+                <a
+                  class="facility-card"
+                  href="https://workspace.google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">🔴</div>
                   <div class="ft">Google Workspace</div>
-                  <div class="fs">Email, Drive, Docs &amp; Meet</div>
-                </div>
-                <div class="facility-card">
-                  <div class="f-ic">🟦</div>
+                  <div class="fs">Email, Drive, Docs &amp; Meet</div></a
+                >
+                <a
+                  class="facility-card"
+                  href="https://www.microsoft.com/en-us/microsoft-365"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">🟦</div>
                   <div class="ft">Microsoft 365</div>
-                  <div class="fs">Office Apps &amp; OneDrive</div>
-                </div>
-                <div class="facility-card">
-                  <div class="f-ic">⬛</div>
+                  <div class="fs">Office Apps &amp; OneDrive</div></a
+                >
+                <a
+                  class="facility-card"
+                  href="https://education.github.com/pack"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">⬛</div>
                   <div class="ft">GitHub Student Pack</div>
-                  <div class="fs">Developer tools &amp; offers</div>
-                </div>
+                  <div class="fs">Developer tools &amp; offers</div></a
+                >
 
-                <div class="facility-card">
-                  <div class="f-ic">🟧</div>
+                <a
+                  class="facility-card"
+                  href="https://www.jetbrains.com/academy/student-pack/?var=1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">🟧</div>
                   <div class="ft">JetBrains License</div>
-                  <div class="fs">Professional IDEs</div>
-                </div>
-                <div class="facility-card">
-                  <div class="f-ic">☁️</div>
+                  <div class="fs">Professional IDEs</div></a
+                >
+                <a
+                  class="facility-card"
+                  href="https://azure.microsoft.com/en-us/free/students/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">☁️</div>
                   <div class="ft">Azure for Students</div>
-                  <div class="fs">Free cloud credits</div>
-                </div>
-                <div class="facility-card">
-                  <div class="f-ic">📮</div>
+                  <div class="fs">Free cloud credits</div></a
+                >
+                <a
+                  class="facility-card"
+                  href="https://www.postman.com/learn/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">📮</div>
                   <div class="ft">Postman</div>
-                  <div class="fs">API Development</div>
-                </div>
-                <div class="facility-card">
-                  <div class="f-ic">🍃</div>
+                  <div class="fs">API Development</div></a
+                >
+                <a
+                  class="facility-card"
+                  href="https://www.mongodb.com/students"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">🍃</div>
                   <div class="ft">MongoDB Atlas</div>
-                  <div class="fs">Cloud Database</div>
-                </div>
+                  <div class="fs">Cloud Database</div></a
+                >
 
-                <div class="facility-card">
-                  <div class="f-ic">🎨</div>
+                <a
+                  class="facility-card"
+                  href="https://www.figma.com/education/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">🎨</div>
                   <div class="ft">Figma Education</div>
-                  <div class="fs">UI/UX Design</div>
-                </div>
-                <div class="facility-card">
-                  <div class="f-ic">🖌️</div>
+                  <div class="fs">UI/UX Design</div></a
+                >
+                <a
+                  class="facility-card"
+                  href="https://www.canva.com/education/students/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">🖌️</div>
                   <div class="ft">Canva Education</div>
-                  <div class="fs">Graphic Design</div>
-                </div>
-                <div class="facility-card">
-                  <div class="f-ic">📐</div>
+                  <div class="fs">Graphic Design</div></a
+                >
+                <a
+                  class="facility-card"
+                  href="https://www.autodesk.com/education/edu-software/overview"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">📐</div>
                   <div class="ft">Autodesk</div>
-                  <div class="fs">Engineering &amp; CAD</div>
-                </div>
-                <div class="facility-card">
-                  <div class="f-ic">📊</div>
+                  <div class="fs">Engineering &amp; CAD</div></a
+                >
+                <a
+                  class="facility-card"
+                  href="https://www.tableau.com/academic/students"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">📊</div>
                   <div class="ft">Tableau</div>
-                  <div class="fs">Data Visualization</div>
-                </div>
+                  <div class="fs">Data Visualization</div></a
+                >
 
-                <div class="facility-card">
-                  <div class="f-ic">🖥️</div>
+                <a
+                  class="facility-card"
+                  href="https://miro.com/education-whiteboard/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">🖥️</div>
                   <div class="ft">Miro</div>
-                  <div class="fs">Collaborative Whiteboard</div>
-                </div>
-                <div class="facility-card">
-                  <div class="f-ic">✅</div>
+                  <div class="fs">Collaborative Whiteboard</div></a
+                >
+                <a
+                  class="facility-card"
+                  href="https://asana.com/industry/students"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">✅</div>
                   <div class="ft">Asana</div>
-                  <div class="fs">Project Management</div>
-                </div>
-                <div class="facility-card">
-                  <div class="f-ic">🟢</div>
+                  <div class="fs">Project Management</div></a
+                >
+                <a
+                  class="facility-card"
+                  href="https://clickup.com/teams/higher-education"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">🟢</div>
                   <div class="ft">ClickUp</div>
-                  <div class="fs">Task Management</div>
-                </div>
-                <div class="facility-card">
-                  <div class="f-ic">📓</div>
+                  <div class="fs">Task Management</div></a
+                >
+                <a
+                  class="facility-card"
+                  href="https://www.notion.com/product/notion-for-education"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">📓</div>
                   <div class="ft">Notion Plus</div>
-                  <div class="fs">Notes &amp; Workspace</div>
-                </div>
+                  <div class="fs">Notes &amp; Workspace</div></a
+                >
 
-                <div class="facility-card">
-                  <div class="f-ic">🤖</div>
+                <a
+                  class="facility-card"
+                  href="https://www.perplexity.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">🤖</div>
                   <div class="ft">Perplexity AI</div>
-                  <div class="fs">AI Search Assistant</div>
-                </div>
-                <div class="facility-card">
-                  <div class="f-ic">📦</div>
+                  <div class="fs">AI Search Assistant</div></a
+                >
+                <a
+                  class="facility-card"
+                  href="https://www.amazon.com/Amazon-Student/b?ie=UTF8&node=668781011"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">📦</div>
                   <div class="ft">Amazon Prime Student</div>
-                  <div class="fs">Student Membership</div>
-                </div>
-                <div class="facility-card">
-                  <div class="f-ic">🎵</div>
+                  <div class="fs">Student Membership</div></a
+                >
+                <a
+                  class="facility-card"
+                  href="https://www.apple.com/apple-music/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">🎵</div>
                   <div class="ft">Apple Music</div>
-                  <div class="fs">Student Plan</div>
-                </div>
-                <div class="facility-card">
-                  <div class="f-ic">🎧</div>
+                  <div class="fs">Student Plan</div></a
+                >
+                <a
+                  class="facility-card"
+                  href="https://www.spotify.com/bd-en/student/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><div class="f-ic">🎧</div>
                   <div class="ft">Spotify Student</div>
-                  <div class="fs">Premium Discount</div>
-                </div>
+                  <div class="fs">Premium Discount</div></a
+                >
               </div>
             </section>
 
@@ -2285,14 +2490,19 @@
                 <span style="font-size: 12.5px; color: var(--muted)"
                   >Search Semester</span
                 >
-                <select id="courseSemSelect" onchange="renderCourses()">
+                <select id="courseSemSelect">
                   <!-- To add a new semester option, add one <option> line here
                  AND add a matching entry in courseData in the script below. -->
                   <option>Fall 2026, 263</option>
                   <option>Summer 2026, 262</option>
                   <option>Spring 2026, 261</option>
                 </select>
-                <button class="btn" onclick="renderCourses()">Search</button>
+                <button
+                  class="btn"
+                  onclick="withSearchLoading('courseBody', true, renderCourses)"
+                >
+                  Search
+                </button>
               </div>
 
               <div class="card">
@@ -2361,7 +2571,7 @@
                 <span style="font-size: 12.5px; color: var(--muted)"
                   >Select Semester</span
                 >
-                <select id="routineSemSelect" onchange="renderRoutine()">
+                <select id="routineSemSelect">
                   <option value="">Select Semester</option>
                   <option>Spring 2027, 271</option>
                   <option>Fall 2026, 263</option>
@@ -2371,7 +2581,14 @@
                   <option>Fall 2025, 253</option>
                   <option>Summer 2025, 252</option>
                 </select>
-                <button class="btn" onclick="renderRoutine()">Search</button>
+                <button
+                  class="btn"
+                  onclick="
+                    withSearchLoading('routineBody', false, renderRoutine)
+                  "
+                >
+                  Search
+                </button>
               </div>
               <div id="routineBody"></div>
             </section>
@@ -2383,11 +2600,16 @@
                 <span style="font-size: 12.5px; color: var(--muted)"
                   >Select Semester</span
                 >
-                <select id="evalSemSelect" onchange="renderEval()">
+                <select id="evalSemSelect">
                   <option>Summer 2026, 262</option>
                   <option>Spring 2026, 261</option>
                 </select>
-                <button class="btn" onclick="renderEval()">Search</button>
+                <button
+                  class="btn"
+                  onclick="withSearchLoading('evalBody', true, renderEval)"
+                >
+                  Search
+                </button>
               </div>
               <div class="card">
                 <table>
@@ -2411,11 +2633,16 @@
                 <span style="font-size: 12.5px; color: var(--muted)"
                   >Select Semester</span
                 >
-                <select id="liveSemSelect" onchange="renderLive()">
+                <select id="liveSemSelect">
                   <option>Summer 2026, 262</option>
                   <option>Spring 2026, 261</option>
                 </select>
-                <button class="btn" onclick="renderLive()">Search</button>
+                <button
+                  class="btn"
+                  onclick="withSearchLoading('liveBody', true, renderLive)"
+                >
+                  Search
+                </button>
               </div>
               <div class="card">
                 <table>
@@ -2575,7 +2802,28 @@
         }
       })
 
+      // ============ SEARCH LOADING SPINNER ============
+      // Change this one number to make every "Search" button load faster/slower.
+      const SEARCH_DELAY_MS = 3000
+
+      function withSearchLoading(targetId, isTable, renderFn) {
+        const el = document.getElementById(targetId)
+        el.innerHTML = isTable
+          ? `<tr><td colspan="20"><div class="spinner-wrap"><div class="spinner"></div><div class="spinner-label">Loading...</div></div></td></tr>`
+          : `<div class="spinner-wrap"><div class="spinner"></div><div class="spinner-label">Loading...</div></div>`
+        setTimeout(renderFn, SEARCH_DELAY_MS)
+      }
+
       const navButtons = document.querySelectorAll('.nav-item')
+
+      // Lets a Dashboard tile (or any element) jump straight to a sidebar section,
+      // reusing all the existing nav-item click behavior (active state, section switch, etc.)
+      function goToNav(targetId) {
+        const btn = document.querySelector(
+          `.nav-item[data-target="${targetId}"]`,
+        )
+        if (btn) btn.click()
+      }
       const sections = document.querySelectorAll('.section')
       const sidebar = document.getElementById('sidebar')
       const menuBtn = document.getElementById('menuBtn')
@@ -2681,20 +2929,43 @@
 
       function renderResult() {
         const sem = document.getElementById('semSelect').value
+        const card = document.getElementById('resultCard')
         const data = resultData[sem]
-        document.getElementById('resSemLabel').textContent = sem
-        document.getElementById('resSgpa').textContent = data.sgpa
-        document.getElementById('totSgpa').textContent = data.sgpa
-        document.getElementById('totCredit').textContent = data.credit
-        const body = document.getElementById('resultBody')
-        body.innerHTML = data.rows
+
+        if (!sem || !data) {
+          card.innerHTML = `<div class="card"><div class="empty-note" style="padding:40px 20px;">No result found. Please select a valid semester.</div></div>`
+          return
+        }
+
+        const rowsHtml = data.rows
           .map(
             (r) =>
               `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td></tr>`,
           )
           .join('')
+
+        card.innerHTML = `
+      <div class="card">
+        <div class="card-head"><h3>👤 Student Information</h3></div>
+        <div class="student-info">
+          <div class="nm">Pronoy Dass</div>
+          <div class="row"><span class="ic">🎓</span> B.Sc. in Software Engineering</div>
+          <div class="row"><span class="ic">👥</span> Batch: 48</div>
+          <div class="row"><span class="ic">🪪</span> Student ID: 02426105341331</div>
+          <div class="row"><span class="ic">💳</span> Reg ID: 261-35-331</div>
+          <div class="row"><span class="ic">ℹ️</span> SGPA of ${sem}: <b>${data.sgpa}</b></div>
+        </div>
+        <table>
+          <thead><tr><th>SL</th><th>Course Code</th><th>Course Title</th><th>Credit</th><th>Grade</th><th>Grade Point</th></tr></thead>
+          <tbody>${rowsHtml}</tbody>
+          <tfoot>
+            <tr><td colspan="3">Total Credit</td><td>${data.credit}</td><td></td><td>SGPA ${data.sgpa}</td></tr>
+          </tfoot>
+        </table>
+        <div class="note-line">N.B.: If you see Teaching Evaluation Pending in any course, please complete <a href="#">Teaching Evaluation</a>.</div>
+      </div>
+    `
       }
-      renderResult()
 
       // Demo payment ledger data per semester
       const ledgerData = {
@@ -2829,7 +3100,8 @@
         document.getElementById('ledgerTotReceivable').textContent = sum(4)
         document.getElementById('ledgerTotPaid').textContent = sum(5)
       }
-      renderLedger()
+      document.getElementById('ledgerBody').innerHTML =
+        '<tr><td colspan="7" style="text-align:center; color:var(--muted); padding:24px;">Select a semester and click Search to view the ledger.</td></tr>'
 
       // Notice board demo data
       const notices = [
@@ -3171,7 +3443,8 @@
               .join('')
           : '<tr><td colspan="7" style="text-align:center; color:var(--muted);">No courses found for this semester.</td></tr>'
       }
-      renderCourses()
+      document.getElementById('courseBody').innerHTML =
+        '<tr><td colspan="7" style="text-align:center; color:var(--muted); padding:24px;">Select a semester and click Search to view registered courses.</td></tr>'
 
       // ---------------- ROUTINE ----------------
       const routineData = {
@@ -3277,7 +3550,8 @@
           )
           .join('')
       }
-      renderEval()
+      document.getElementById('evalBody').innerHTML =
+        '<tr><td colspan="4" style="text-align:center; color:var(--muted); padding:24px;">Select a semester and click Search to view evaluation status.</td></tr>'
 
       // ---------------- LIVE RESULTS ----------------
       const liveData = {
@@ -3336,7 +3610,8 @@
           )
           .join('')
       }
-      renderLive()
+      document.getElementById('liveBody').innerHTML =
+        '<tr><td colspan="7" style="text-align:center; color:var(--muted); padding:24px;">Select a semester and click Search to view results.</td></tr>'
 
       // Financial Aid Circular toast: show briefly each time the page is opened
       navButtons.forEach((btn) => {
